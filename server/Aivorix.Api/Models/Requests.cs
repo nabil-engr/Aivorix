@@ -1,0 +1,1 @@
+namespace Aivorix.Api.Models; public sealed record NewsletterRequest(string Email,string? Website); public sealed record LeadRequest(string Name,string Email,string? Company,string Message,string? Website);

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aivorix.com/sitemap.xml
+Sitemap: https://aivorix.com/news-sitemap.xml

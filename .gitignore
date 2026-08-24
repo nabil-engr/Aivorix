@@ -1,0 +1,41 @@
+# IDE and editor state
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Node / Angular
+**/node_modules/
+**/.angular/
+**/dist/
+**/.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# .NET build output
+**/bin/
+**/obj/
+
+# Generated frontend copied into the API
+server/Aivorix.Api/wwwroot/
+
+# Runtime submission data
+server/Aivorix.Api/App_Data/*.json
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+appsettings.Development.json
+appsettings.Local.json
+
+# Test and coverage output
+coverage/
+TestResults/
+

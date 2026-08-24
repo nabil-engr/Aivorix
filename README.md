@@ -1,3 +1,5 @@
+<h1><a href="https://nabil-engr.github.io/aivorix-live/">Live Link</h1>
+
 # Aivorix — AI News & Comparison Website
 
 Production-oriented starter built with **ASP.NET Core 8 + Angular 21 SSR/prerender**.

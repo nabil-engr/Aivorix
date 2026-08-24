@@ -352,6 +352,14 @@ export class HomeComponent implements OnInit {
   }
 
   async subscribe(): Promise<void> {
+    if (
+      typeof window !== "undefined" &&
+      window.location.hostname.endsWith(".github.io")
+    ) {
+      this.message = "Newsletter signup needs the API server and is unavailable on GitHub Pages.";
+      return;
+    }
+
     try {
       const response = await fetch("/api/newsletter", {
         method: "POST",

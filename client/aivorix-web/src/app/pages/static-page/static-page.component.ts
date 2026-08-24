@@ -243,6 +243,15 @@ export class StaticPageComponent implements OnInit {
       return;
     }
 
+    if (
+      typeof window !== "undefined" &&
+      window.location.hostname.endsWith(".github.io")
+    ) {
+      this.formStatus =
+        "Contact submission needs the API server and is unavailable on GitHub Pages.";
+      return;
+    }
+
     this.submitting = true;
     this.formStatus = "";
 

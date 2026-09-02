@@ -66,3 +66,6 @@ dotnet run --project server/Aivorix.Api
 
 ## Important content policy
 The included articles are original summaries based on linked primary/reputable sources. Do not auto-copy publisher articles. If you later automate news ingestion, store source metadata and write original summaries with human review.
+
+
+> Auto-deployed with GitHub Actions

@@ -1,4 +1,4 @@
-<h1><a href="https://nabil-engr.github.io/aivorix-live/">Live Link</h1>
+<h1><a href="https://nabil-engr.github.io/Aivorix/">Live site</a></h1>
 
 # Aivorix — AI News & Comparison Website
 
@@ -66,6 +66,3 @@ dotnet run --project server/Aivorix.Api
 
 ## Important content policy
 The included articles are original summaries based on linked primary/reputable sources. Do not auto-copy publisher articles. If you later automate news ingestion, store source metadata and write original summaries with human review.
-
-
-> Auto-deployed with GitHub Actions

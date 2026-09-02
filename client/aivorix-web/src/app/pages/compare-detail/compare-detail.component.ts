@@ -7,20 +7,24 @@ import { SeoService } from "../../services/seo.service";
   standalone: true,
   imports: [RouterLink],
   template: `@if (c) {
-      <article>
+      <article class="comparison-detail">
         <header class="article-hero">
           <div class="container article-width">
-            <a routerLink="/comparisons" class="back">← Comparisons     </a
-            ><span class="eyebrow">(Last verified {{ c.updated }})</span>
+            <div class="comparison-meta">
+              <a routerLink="/comparisons" class="back"><span aria-hidden="true">←</span> Comparisons</a>
+              <span class="meta-divider" aria-hidden="true"></span>
+              <span class="verified"><span class="verified-dot" aria-hidden="true"></span>Last verified {{ c.updated }}</span>
+            </div>
             <h1>{{ c.title }}</h1>
             <p class="lead">{{ c.intro }}</p>
           </div>
         </header>
         <div class="container article-width article-body">
-          <div class="verdict">
+          <section class="verdict" aria-labelledby="quick-verdict">
             <span class="eyebrow">Quick verdict</span>
+            <h2 id="quick-verdict">{{ left?.name }} or {{ right?.name }}?</h2>
             <p>{{ c.verdict }}</p>
-          </div>
+          </section>
           <div class="winner-grid">
             <div class="card">
               <small>Choose {{ left?.name }} for</small>
@@ -31,7 +35,7 @@ import { SeoService } from "../../services/seo.service";
               <h3>{{ c.bestRight }}</h3>
             </div>
           </div>
-          <h2>Side-by-side comparison</h2>
+          <div class="comparison-section-heading"><span>01</span><h2>Side-by-side comparison</h2></div>
           <div class="table-wrap">
             <table>
               <thead>
@@ -52,15 +56,17 @@ import { SeoService } from "../../services/seo.service";
               </tbody>
             </table>
           </div>
-          <h2>How we reached this verdict</h2>
+          <div class="comparison-section-heading"><span>02</span><h2>How we reached this verdict</h2></div>
           <p>
-            We compare documented product capabilities, current plan structure,
-            workflow fit and official provider information. We do not turn
-            vendor benchmark charts into a universal “winner” score because
-            evaluation harnesses and settings differ.
+            We looked at the things that affect everyday use: what each product can
+            do, how its plans are structured, where it fits into your existing
+            workflow, and what the provider currently documents. Benchmark
+            results are useful context, but they are not a universal winner
+            score because test settings and tools vary.
           </p>
-          <div class="source-panel">
-            <h3>Official sources</h3>
+          <section class="source-panel" aria-labelledby="official-sources">
+            <div class="comparison-section-heading compact"><span>03</span><h3 id="official-sources">Official sources</h3></div>
+            <p class="source-intro">Use these provider pages to confirm current features, pricing and availability.</p>
             <ul>
               @for (s of c.sources; track s) {
                 <li>
@@ -70,11 +76,11 @@ import { SeoService } from "../../services/seo.service";
                 </li>
               }
             </ul>
-          </div>
+          </section>
           <p class="updated-note">
-            AI products change fast. This comparison was checked on
-            {{ c.updated }}. Re-check pricing, regional availability and plan
-            limits before buying.
+            AI tools change quickly. We checked this page on {{ c.updated }}.
+            Before you subscribe, confirm the latest price, regional availability
+            and usage limits on the provider website.
           </p>
         </div>
       </article>

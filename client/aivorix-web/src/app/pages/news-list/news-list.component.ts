@@ -9,15 +9,15 @@ import { SeoService } from "../../services/seo.service";
   template: `<section class="page-hero">
       <div class="container">
         <span class="eyebrow">AI News</span>
-        <h1>What changed, why it matters.</h1>
+        <h1>The AI updates worth knowing.</h1>
         <p class="lead">
-          Original summaries and context linked back to primary or reputable
-          reporting sources.
+          Clear, original summaries of important AI launches, business moves and
+          safety developments, with links to the reporting behind each story.
         </p>
         <input
           class="search"
           [(ngModel)]="q"
-          placeholder="Search news…"
+          placeholder="Search AI news..."
           aria-label="Search news"
         />
       </div>
@@ -35,7 +35,7 @@ import { SeoService } from "../../services/seo.service";
             </h2>
             <p>{{ a.summary }}</p>
             <div class="source">
-              Primary/reporting source: {{ a.sourceName }}
+              Source: {{ a.sourceName }}
             </div>
           </article>
         }
@@ -48,9 +48,9 @@ export class NewsListComponent implements OnInit {
   constructor(private seo: SeoService) {}
   ngOnInit() {
     this.seo.set({
-      title: "AI News",
+      title: "Latest AI News, Model Releases and Product Updates",
       description:
-        "Source-backed AI news covering OpenAI, Anthropic, Google, Meta, SpaceXAI, Perplexity and the fast-changing AI market.",
+        "Read the latest AI news in plain English, including model launches, product updates, pricing changes, safety research and major industry developments.",
       path: "/news",
     });
   }

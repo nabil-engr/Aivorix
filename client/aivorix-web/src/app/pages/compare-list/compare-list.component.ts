@@ -8,13 +8,13 @@ import { SeoService } from "../../services/seo.service";
   template: `<section class="page-hero">
       <div class="container">
         <span class="eyebrow">AI Comparisons</span>
-        <h1>Compare tools by workflow, not hype.</h1>
+        <h1>Find the right AI tool for the way you work.</h1>
         <p class="lead">
-          Every page includes a verification date and links to the official
-          product/model sources used.
+          See the practical differences in features, pricing and day-to-day use.
+          Every comparison includes a review date and links to official sources.
         </p>
         <a routerLink="/compare" class="btn primary"
-          >Interactive compare builder</a
+          >Compare any two AI tools</a
         >
       </div>
     </section>
@@ -38,9 +38,9 @@ export class CompareListComponent implements OnInit {
   constructor(private seo: SeoService) {}
   ngOnInit() {
     this.seo.set({
-      title: "AI Comparisons",
+      title: "Best AI Tool Comparisons: Features, Pricing and Use Cases",
       description:
-        "Side-by-side comparisons of ChatGPT, Claude, Gemini, Perplexity, Grok, Microsoft Copilot, Meta AI and leading models.",
+        "Compare leading AI tools side by side. Understand pricing, features, strengths and best use cases for ChatGPT, Claude, Gemini, Copilot and more.",
       path: "/comparisons",
     });
   }

@@ -75,10 +75,10 @@ function buildFallbackDossier(tool: AiTool): ToolDossier {
         <div class="container detail-width detail-layout">
           <aside class="dossier-nav" aria-label="On this page">
             <span>On this page</span>
-            <a href="#overview">Overview</a><a href="#history">Release history</a>
-            <a href="#comparison">Then vs now</a><a href="#power">Power evidence</a>
-            <a href="#features">How features work</a><a href="#roadmap">What's next</a>
-            <a href="#sources">Sources</a>
+            <a [routerLink]="[]" fragment="overview">Overview</a><a [routerLink]="[]" fragment="history">Release history</a>
+            <a [routerLink]="[]" fragment="comparison">Then vs now</a><a [routerLink]="[]" fragment="power">Power evidence</a>
+            <a [routerLink]="[]" fragment="features">How features work</a><a [routerLink]="[]" fragment="roadmap">What's next</a>
+            <a [routerLink]="[]" fragment="sources">Sources</a>
           </aside>
 
           <main class="dossier-content">
@@ -204,7 +204,7 @@ function buildFallbackDossier(tool: AiTool): ToolDossier {
     .dossier-nav a { padding: 8px 0; border-bottom: 1px solid transparent; color: var(--muted); font-size: .86rem; font-weight: 650; }
     .dossier-nav a:hover { border-bottom-color: var(--line); color: var(--accent); }
     .dossier-content { min-width: 0; }
-    .content-section { scroll-margin-top: 100px; padding: 24px 0 80px; border-bottom: 1px solid var(--line); }
+    .content-section { scroll-margin-top: 116px; padding: 24px 0 80px; border-bottom: 1px solid var(--line); }
     .content-section:last-child { border-bottom: 0; }
     .section-index { display: inline-block; margin-bottom: 20px; color: var(--accent); font-size: .72rem; font-weight: 850; letter-spacing: .11em; }
     .content-section h2 { max-width: 780px; margin: 0 0 19px; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.05; letter-spacing: -.035em; }

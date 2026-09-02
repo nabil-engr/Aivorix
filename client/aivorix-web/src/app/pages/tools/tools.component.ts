@@ -9,15 +9,15 @@ import { SeoService } from "../../services/seo.service";
   template: `<section class="page-hero">
       <div class="container">
         <span class="eyebrow">AI Tools Directory</span>
-        <h1>Know what each AI product is actually for.</h1>
+        <h1>Choose an AI tool that fits your real work.</h1>
         <p class="lead">
-          Release timelines, version-by-version changes, benchmark evidence,
-          feature explainers and verified roadmap notes.
+          Browse clear profiles of leading AI tools for writing, coding, research,
+          design, video, audio and everyday productivity.
         </p>
         <input
           class="search"
           [(ngModel)]="q"
-          placeholder="Search ChatGPT, Claude, research, coding…"
+          placeholder="Search tools, companies or use cases..."
         />
       </div>
     </section>
@@ -33,7 +33,7 @@ import { SeoService } from "../../services/seo.service";
             <p class="muted">{{ t.company }}</p>
             <p>{{ t.bestFor }}</p>
             <strong>{{ t.price }}</strong
-            ><span class="open">Open research dossier →</span></a
+            ><span class="open">View tool details</span></a
           >
         }
       </div>
@@ -45,9 +45,9 @@ export class ToolsComponent implements OnInit {
   constructor(private seo: SeoService) {}
   ngOnInit() {
     this.seo.set({
-      title: "AI Tools Directory",
+      title: "AI Tools Directory: Compare Features, Pricing and Uses",
       description:
-        "Research dossiers for major AI tools with release history, version changes, benchmark evidence, feature explainers and official roadmap sources.",
+        "Explore AI tools for writing, coding, research, design, video and productivity. Compare features, pricing notes and the tasks each product handles best.",
       path: "/tools",
     });
   }

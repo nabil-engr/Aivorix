@@ -19,7 +19,7 @@ import { SeoService } from "../../services/seo.service";
       <div class="container">
         <div class="benchmark-intro">
           <div>
-            <span class="eyebrow">Aivorix benchmark desk · August 2026</span>
+            <span class="eyebrow">Aivorix benchmark desk · September 2026</span>
             <h1>There is no single “best AI.”<br /><span>The task decides.</span></h1>
           </div>
           <div class="intro-copy">
@@ -112,8 +112,8 @@ import { SeoService } from "../../services/seo.service";
 
         <div class="signal-heading">
           <div>
-            <span class="eyebrow">All eight products</span>
-            <h2>One useful signal for every tool</h2>
+            <span class="eyebrow">All {{ tools.length }} products</span>
+            <h2>One useful signal for every AI tool</h2>
           </div>
           <p>
             These cards use different task-specific measurements and are not a shared ranking.
@@ -211,7 +211,7 @@ import { SeoService } from "../../services/seo.service";
     .intro-copy .actions { margin-bottom: 0; }
 
     .benchmark-console { border: 1px solid var(--line-strong); background: var(--bg); box-shadow: var(--shadow); }
-    .benchmark-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid var(--line-strong); background: var(--surface-2); }
+    .benchmark-tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-bottom: 1px solid var(--line-strong); background: var(--surface-2); }
     .benchmark-tabs button { min-height: 58px; display: flex; align-items: center; gap: 12px; padding: 13px 16px; border: 0; border-right: 1px solid var(--line); background: transparent; color: var(--muted); font-size: .8rem; font-weight: 750; text-align: left; cursor: pointer; }
     .benchmark-tabs button:last-child { border-right: 0; }
     .benchmark-tabs button span { color: var(--line-strong); font-family: Georgia, 'Times New Roman', serif; font-size: .76rem; }
@@ -286,9 +286,9 @@ import { SeoService } from "../../services/seo.service";
     @media (max-width: 720px) {
       .benchmark-hero { padding-top: 45px; }
       .benchmark-intro h1 { font-size: clamp(2.8rem, 15vw, 5rem); }
-      .benchmark-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .benchmark-tabs button:nth-child(2) { border-right: 0; }
-      .benchmark-tabs button:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
+      .benchmark-tabs { grid-template-columns: 1fr; }
+      .benchmark-tabs button { border-right: 0; border-bottom: 1px solid var(--line); }
+      .benchmark-tabs button:last-child { border-bottom: 0; }
       .chart-column { padding: 24px 18px 28px; }
       .chart-heading { display: block; }
       .chart-scale { display: block; margin-top: 12px; text-align: left; }
@@ -307,7 +307,7 @@ import { SeoService } from "../../services/seo.service";
   `,
 })
 export class HomeComponent implements OnInit {
-  readonly news = NEWS;
+  readonly news = [...NEWS].sort((a, b) => b.date.localeCompare(a.date));
   readonly comps = COMPARISONS;
   readonly tools = AI_TOOLS;
   readonly benchmarks = HOME_BENCHMARKS;

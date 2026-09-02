@@ -10,8 +10,8 @@ import { SeoService } from "../../services/seo.service";
       <article>
         <header class="article-hero">
           <div class="container article-width">
-            <a routerLink="/comparisons" class="back">← Comparisons</a
-            ><span class="eyebrow">Last verified {{ c.updated }}</span>
+            <a routerLink="/comparisons" class="back">← Comparisons     </a
+            ><span class="eyebrow">(Last verified {{ c.updated }})</span>
             <h1>{{ c.title }}</h1>
             <p class="lead">{{ c.intro }}</p>
           </div>
@@ -42,7 +42,7 @@ import { SeoService } from "../../services/seo.service";
                 </tr>
               </thead>
               <tbody>
-                @for (r of c.rows; track r[0]) {
+                @for (r of comparisonRows; track r[0]) {
                   <tr>
                     <th>{{ r[0] }}</th>
                     <td>{{ r[1] }}</td>
@@ -88,6 +88,29 @@ export class CompareDetailComponent implements OnInit {
   c: any;
   left: any;
   right: any;
+  get comparisonRows(): readonly (readonly string[])[] {
+    if (!this.c || !this.left || !this.right) return [];
+    const important = [
+      ["Company", this.left.company, this.right.company],
+      ["Product category", this.left.category, this.right.category],
+      ["Current pricing note", this.left.price, this.right.price],
+      ["Best suited to", this.left.bestFor, this.right.bestFor],
+      [
+        "Key capabilities",
+        this.left.features.join("; "),
+        this.right.features.join("; "),
+      ],
+      ["Last verified", this.left.verified, this.right.verified],
+      ["Official product source", this.left.source, this.right.source],
+    ] as const;
+    const existing = new Set(
+      this.c.rows.map((row: readonly string[]) => row[0].toLowerCase()),
+    );
+    return [
+      ...this.c.rows,
+      ...important.filter((row) => !existing.has(row[0].toLowerCase())),
+    ];
+  }
   constructor(
     private route: ActivatedRoute,
     private seo: SeoService,

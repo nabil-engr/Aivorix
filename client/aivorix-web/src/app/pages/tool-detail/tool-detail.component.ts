@@ -8,6 +8,38 @@ import { SeoService } from "../../services/seo.service";
 type AiTool = (typeof AI_TOOLS)[number];
 type Comparison = (typeof COMPARISONS)[number];
 
+function buildFallbackDossier(tool: AiTool): ToolDossier {
+  return {
+    launched: "See official product history",
+    currentRelease: "Current product",
+    releaseStatus: `Feature and plan availability verified ${tool.verified}`,
+    positioning: `${tool.name} is a ${tool.category.toLowerCase()} product from ${tool.company}, best suited to ${tool.bestFor.toLowerCase()}.`,
+    modelNote: "The product, its underlying models and its subscription limits can change independently. Verify the official source before purchase or deployment.",
+    overview: [
+      `${tool.name} focuses on ${tool.bestFor.toLowerCase()}. Its current profile includes ${tool.features.join(", ")}.`,
+      `Aivorix treats pricing, plan limits, model routing and regional availability as time-sensitive. The official provider page remains the final source of truth.`,
+    ],
+    timeline: [{ date: tool.verified, title: "Current product profile verified", status: "Current", summary: `Aivorix reviewed the public product and plan information available for ${tool.name}.`, changes: tool.features, sourceUrl: tool.source }],
+    comparisonLabel: "Product scope: quick reference",
+    comparison: [
+      { dimension: "Primary category", previous: "Earlier product scope varies", current: tool.category, difference: "Use current provider documentation" },
+      { dimension: "Best fit", previous: "General availability", current: tool.bestFor, difference: "Evaluate with a representative workflow" },
+      { dimension: "Pricing", previous: "Plans change over time", current: tool.price, difference: "Re-check before buying" },
+      { dimension: "Feature set", previous: "Earlier releases may differ", current: tool.features.join("; "), difference: "Plan and region limits may apply" },
+    ],
+    powerHeadline: "Evidence before rankings",
+    powerNote: "No universal performance score is assigned without a directly comparable, independently reproducible evaluation.",
+    metrics: [
+      { value: `${tool.features.length}`, label: "Documented capability areas", detail: "High-level capabilities included in this current Aivorix profile.", sourceUrl: tool.source },
+      { value: tool.verified, label: "Last verified", detail: "The date on which this product profile was last editorially checked.", sourceUrl: tool.source },
+      { value: "Official", label: "Primary source", detail: "Product and plan claims link to the provider's own documentation.", sourceUrl: tool.source },
+    ],
+    features: tool.features.map((feature) => ({ name: feature, availability: "Plan and region dependent", howItWorks: `This capability is part of ${tool.name}'s documented product profile.`, usefulFor: tool.bestFor, caution: "Confirm current limits, privacy terms and commercial-use rights." })),
+    limitations: ["Plan limits and regional availability can change.", "Provider descriptions are not independent performance tests.", "Test quality, latency, privacy and total cost on your own workflow."],
+    roadmap: [{ title: "Future updates", status: "No public date", detail: "Aivorix does not infer an unannounced roadmap. Follow the official provider source for confirmed releases.", sourceUrl: tool.source }],
+    sources: [{ title: `${tool.name} official product information`, publisher: tool.company, date: tool.verified, url: tool.source }],
+  };
+}
 @Component({
   standalone: true,
   imports: [RouterLink],
@@ -268,8 +300,7 @@ export class ToolDetailComponent implements OnInit {
     const slug = this.route.snapshot.paramMap.get("slug");
     this.tool = AI_TOOLS.find((item) => item.slug === slug);
     if (!this.tool) { this.seo.noIndex(); return; }
-    this.dossier = AI_TOOL_DETAILS[this.tool.slug];
-    if (!this.dossier) { this.seo.noIndex(); return; }
+    this.dossier = AI_TOOL_DETAILS[this.tool.slug] ?? buildFallbackDossier(this.tool);
     this.related = COMPARISONS.filter((comparison) => comparison.left === this.tool?.slug || comparison.right === this.tool?.slug);
     this.seo.set({
       title: `${this.tool.name}: release history, versions, features & roadmap`,

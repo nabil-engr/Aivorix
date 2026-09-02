@@ -44,7 +44,7 @@ import { SeoService } from "../../services/seo.service";
 })
 export class NewsListComponent implements OnInit {
   q = "";
-  items = NEWS;
+  items = [...NEWS].sort((a, b) => b.date.localeCompare(a.date));
   constructor(private seo: SeoService) {}
   ngOnInit() {
     this.seo.set({

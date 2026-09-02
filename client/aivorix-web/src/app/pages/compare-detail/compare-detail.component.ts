@@ -11,9 +11,14 @@ import { SeoService } from "../../services/seo.service";
         <header class="article-hero">
           <div class="container article-width">
             <div class="comparison-meta">
-              <a routerLink="/comparisons" class="back"><span aria-hidden="true">←</span> Comparisons</a>
+              <a routerLink="/comparisons" class="back"
+                ><span aria-hidden="true">←</span> Comparisons</a
+              >
               <span class="meta-divider" aria-hidden="true"></span>
-              <span class="verified"><span class="verified-dot" aria-hidden="true"></span>Last verified {{ c.updated }}</span>
+              <span class="verified"
+                ><span class="verified-dot" aria-hidden="true"></span>Last
+                verified {{ c.updated }}</span
+              >
             </div>
             <h1>{{ c.title }}</h1>
             <p class="lead">{{ c.intro }}</p>
@@ -35,7 +40,10 @@ import { SeoService } from "../../services/seo.service";
               <h3>{{ c.bestRight }}</h3>
             </div>
           </div>
-          <div class="comparison-section-heading"><span>01</span><h2>Side-by-side comparison</h2></div>
+          <div class="comparison-section-heading">
+            <span>01</span>
+            <h2>Side-by-side comparison</h2>
+          </div>
           <div class="table-wrap">
             <table>
               <thead>
@@ -56,17 +64,26 @@ import { SeoService } from "../../services/seo.service";
               </tbody>
             </table>
           </div>
-          <div class="comparison-section-heading"><span>02</span><h2>How we reached this verdict</h2></div>
+          <div class="comparison-section-heading">
+            <span>02</span>
+            <h2>How we reached this verdict</h2>
+          </div>
           <p>
-            We looked at the things that affect everyday use: what each product can
-            do, how its plans are structured, where it fits into your existing
-            workflow, and what the provider currently documents. Benchmark
-            results are useful context, but they are not a universal winner
-            score because test settings and tools vary.
+            We looked at the things that affect everyday use: what each product
+            can do, how its plans are structured, where it fits into your
+            existing workflow, and what the provider currently documents.
+            Benchmark results are useful context, but they are not a universal
+            winner score because test settings and tools vary.
           </p>
           <section class="source-panel" aria-labelledby="official-sources">
-            <div class="comparison-section-heading compact"><span>03</span><h3 id="official-sources">Official sources</h3></div>
-            <p class="source-intro">Use these provider pages to confirm current features, pricing and availability.</p>
+            <div class="comparison-section-heading compact">
+              <span>03</span>
+              <h3 id="official-sources">Official sources</h3>
+            </div>
+            <p class="source-intro">
+              Use these provider pages to confirm current features, pricing and
+              availability.
+            </p>
             <ul>
               @for (s of c.sources; track s) {
                 <li>
@@ -79,8 +96,8 @@ import { SeoService } from "../../services/seo.service";
           </section>
           <p class="updated-note">
             AI tools change quickly. We checked this page on {{ c.updated }}.
-            Before you subscribe, confirm the latest price, regional availability
-            and usage limits on the provider website.
+            Before you subscribe, confirm the latest price, regional
+            availability and usage limits on the provider website.
           </p>
         </div>
       </article>

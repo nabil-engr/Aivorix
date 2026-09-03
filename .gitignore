@@ -39,3 +39,6 @@ appsettings.Local.json
 coverage/
 TestResults/
 
+
+# Local Netlify folder
+.netlify

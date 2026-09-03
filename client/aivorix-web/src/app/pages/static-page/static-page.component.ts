@@ -67,7 +67,15 @@ const PAGES: Record<string, readonly [string, string, string]> = {
         <p>{{ page[2] }}</p>
 
         @if (key === "contact") {
-          <form class="card contact-form" (ngSubmit)="submitContact()">
+          <form
+            class="card contact-form"
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="website"
+            (ngSubmit)="submitContact()"
+          >
+            <input type="hidden" name="form-name" value="contact" />
             <div class="field-row">
               <label>
                 Name
@@ -243,29 +251,22 @@ export class StaticPageComponent implements OnInit {
       return;
     }
 
-    if (
-      typeof window !== "undefined" &&
-      window.location.hostname.endsWith(".github.io")
-    ) {
-      this.formStatus =
-        "Contact submission needs the API server and is unavailable on GitHub Pages.";
-      return;
-    }
-
     this.submitting = true;
     this.formStatus = "";
 
     try {
-      const response = await fetch("/api/leads", {
+      const body = new URLSearchParams({
+        "form-name": "contact",
+        name: this.name,
+        email: this.email,
+        company: this.company,
+        message: this.message,
+        website: this.website,
+      });
+      const response = await fetch("/", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: this.name,
-          email: this.email,
-          company: this.company,
-          message: this.message,
-          website: this.website,
-        }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
       });
 
       if (!response.ok) {

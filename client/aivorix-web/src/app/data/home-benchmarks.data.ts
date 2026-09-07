@@ -1,8 +1,10 @@
+import { AI_TOOLS } from "./tools.data";
+
 export interface BenchmarkEntry {
   toolSlug: string;
   tool: string;
   model: string;
-  score: number;
+  score: number | null;
   displayScore: string;
   note: string;
 }
@@ -33,7 +35,7 @@ export interface ProductSignal {
   sourceUrl: string;
 }
 
-export const HOME_BENCHMARKS: readonly BenchmarkView[] = [
+const RECORDED_BENCHMARKS: readonly BenchmarkView[] = [
   {
     slug: "all-tools",
     tabLabel: "All AI tools",
@@ -455,7 +457,37 @@ export const HOME_BENCHMARKS: readonly BenchmarkView[] = [
   },
 ];
 
+// Retain the named model/harness behind each historical score. A missing
+// measurement must never become a zero or inherit another model's result.
+export const HOME_BENCHMARKS: readonly BenchmarkView[] = RECORDED_BENCHMARKS.map(view => ({
+  ...view,
+  entries: [
+    ...view.entries,
+    ...AI_TOOLS.filter(tool => !view.entries.some(entry => entry.toolSlug === tool.slug))
+      .map(tool => ({
+        toolSlug: tool.slug,
+        tool: tool.name,
+        model: tool.category,
+        score: null,
+        displayScore: "N/A",
+        note: view.slug === "all-tools"
+          ? "Editorial rating pending"
+          : "No comparable result in this snapshot",
+      })),
+  ],
+}));
+
 export const PRODUCT_SIGNALS: readonly ProductSignal[] = [
+  {
+    toolSlug: "gpt-6-astra", tool: "GPT-6 Astra", value: "1.05M",
+    metric: "Context tokens", context: "Model specification · not a benchmark score",
+    sourceName: "OpenAI", sourceUrl: "https://developers.openai.com/api/docs/models/gpt-6-astra",
+  },
+  {
+    toolSlug: "gpt-5-6-sol", tool: "GPT-5.6 Sol", value: "1.05M",
+    metric: "Context tokens", context: "Model specification · not a benchmark score",
+    sourceName: "OpenAI", sourceUrl: "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+  },
   {
     toolSlug: "chatgpt",
     tool: "ChatGPT",

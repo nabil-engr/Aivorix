@@ -1,4 +1,36 @@
 export const AI_TOOLS = [
+{
+  "slug": "gpt-6-astra",
+  "name": "GPT-6 Astra",
+  "company": "OpenAI",
+  "category": "Reasoning Model",
+  "price": "API / 1M tokens: $10 input, $1 cached input, $50 output; long-context/tool charges extra",
+  "bestFor": "Complex coding, research and multi-step agent work with a configurable model",
+  "source": "https://developers.openai.com/api/docs/models/gpt-6-astra",
+  "verified": "2026-09-07",
+  "features": [
+    "1.05M-token context; up to 128K output",
+    "Text/image input and text output",
+    "Async tools and mid-turn steering",
+    "Reasoning effort from low to max"
+  ]
+},
+{
+  "slug": "gpt-5-6-sol",
+  "name": "GPT-5.6 Sol",
+  "company": "OpenAI",
+  "category": "Reasoning Model",
+  "price": "API / 1M tokens: $4 input, $0.40 cached input, $20 output; long-context/tool charges extra",
+  "bestFor": "Professional API workflows where token cost and reasoning controls matter",
+  "source": "https://developers.openai.com/api/docs/models/gpt-5.6-sol",
+  "verified": "2026-09-07",
+  "features": [
+    "1.05M-token context; up to 128K output",
+    "Text/image input and text output",
+    "Reasoning effort includes none",
+    "gpt-5.6 alias routes to Sol"
+  ]
+},
   {
     slug: "chatgpt",
     name: "ChatGPT",
@@ -10,7 +42,7 @@ export const AI_TOOLS = [
     source: "https://openai.com/index/introducing-chatgpt-go/",
     verified: "2026-08-24",
     features: [
-      "GPT-5.6 Sol, Terra and Luna tiers",
+      "GPT-5.6 family; see the separate GPT-6 Astra model dossier for Astra specifications",
       "Deep research and file analysis on eligible plans",
       "Programmatic tools and multi-agent workflows",
       "Image, voice and connected-app features",

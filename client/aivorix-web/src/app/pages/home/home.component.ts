@@ -88,13 +88,14 @@ import { SeoService } from "../../services/seo.service";
                       class="bar-label"
                       [routerLink]="['/tools', entry.toolSlug]"
                     >
-                      <span class="rank">{{ rank + 1 }}</span>
+                      <span class="rank">{{ entry.score === null ? '—' : rank + 1 }}</span>
                       <span
                         ><strong>{{ entry.tool }}</strong
                         ><small>{{ entry.model }}</small></span
                       >
                     </a>
                     <div class="bar-plot">
+                      @if (entry.score !== null) {
                       <div
                         class="bar-track"
                         role="img"
@@ -114,6 +115,9 @@ import { SeoService } from "../../services/seo.service";
                           "
                         ></span>
                       </div>
+                      } @else {
+                        <span class="unscored-label">Not ranked</span>
+                      }
                       <strong class="bar-score">{{
                         entry.displayScore
                       }}</strong>
@@ -137,8 +141,12 @@ import { SeoService } from "../../services/seo.service";
                   <dd>{{ currentBenchmark.verified }}</dd>
                 </div>
                 <div>
-                  <dt>Products tested</dt>
+                  <dt>Catalog entries</dt>
                   <dd>{{ currentBenchmark.entries.length }}</dd>
+                </div>
+                <div>
+                  <dt>With scores</dt>
+                  <dd>{{ scoredCount }}</dd>
                 </div>
               </dl>
               <a
@@ -152,7 +160,8 @@ import { SeoService } from "../../services/seo.service";
                 <strong>Fair comparison rule</strong>
                 <span
                   >Scores are comparable only inside the currently selected
-                  tab.</span
+                  tab. N/A means no comparable score is recorded here, not zero
+                  performance. Historical results retain their tested model.</span
                 >
               </div>
             </aside>
@@ -533,6 +542,12 @@ import { SeoService } from "../../services/seo.service";
       font-size: 1.15rem;
       text-align: right;
     }
+    .unscored-label {
+      color: var(--muted);
+      font-size: 0.75rem;
+      border-left: 2px solid var(--line);
+      padding-left: 10px;
+    }
     .bar-plot > small {
       color: var(--muted);
       font-size: 0.66rem;
@@ -820,6 +835,10 @@ export class HomeComponent implements OnInit {
 
   selectBenchmark(slug: string): void {
     this.selectedBenchmarkSlug = slug;
+  }
+
+  get scoredCount(): number {
+    return this.currentBenchmark.entries.filter(entry => entry.score !== null).length;
   }
 
   barWidth(score: number, max: number): number {

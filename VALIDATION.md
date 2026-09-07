@@ -1,5 +1,18 @@
 # Validation report
 
+## Update: 2026-09-07 — Astra and complete benchmark coverage
+
+- Angular production build: passed; 68 routes prerendered, 512 kB initial bundle.
+- ASP.NET Core Release build (`--no-restore`): passed, zero warnings/errors.
+- `node scripts/check-content.mjs --prerender`: checks unique slugs, comparison references, all-tool coverage in every benchmark tab, missing-score semantics, product signals, Astra dossier/news/comparison presence, backend catalog synchronization and prerendered pages.
+- Current content: 16 news articles, 11 comparisons, 28 catalog entries, 5 benchmark views. Astra and GPT-5.6 Sol have separate model entries; compare builder defaults to that pair.
+- Missing benchmark results remain null/N/A and unranked. Earlier model scores are preserved under their original model labels. Recorded scores were not re-verified in this change.
+- Astra facts sourced from OpenAI model specification, model guidance and model comparison documentation, checked September 7. Article date is an editorial briefing date, not an asserted launch date.
+- Backend catalog regenerated with `node scripts/check-content.mjs --sync-catalog`.
+- Browser visual/interaction verification unavailable in this session. No live deployment or form submissions performed.
+
+The report below is retained as historical evidence; it does not describe the current Netlify deployment.
+
 Generated: 2026-08-24
 
 ## Content integrity

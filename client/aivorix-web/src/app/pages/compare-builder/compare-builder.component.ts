@@ -101,8 +101,8 @@ import { SeoService } from "../../services/seo.service";
 })
 export class CompareBuilderComponent implements OnInit {
   readonly tools = AI_TOOLS;
-  a = "chatgpt";
-  b = "claude";
+  a = "gpt-6-astra";
+  b = "gpt-5-6-sol";
 
   constructor(private readonly seo: SeoService) {}
 
@@ -110,7 +110,7 @@ export class CompareBuilderComponent implements OnInit {
     this.seo.set({
       title: "AI Comparison Builder",
       description:
-        "Compare ChatGPT, Claude, Gemini, Perplexity, Grok, Meta AI and Microsoft Copilot side by side.",
+        "Compare GPT-6 Astra, GPT-5.6 Sol, ChatGPT, Claude, Gemini and other AI tools side by side.",
       path: "/compare",
     });
   }

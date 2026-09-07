@@ -1,4 +1,23 @@
 export const NEWS = [
+{
+  "slug": "gpt-6-astra-model-guide-pricing-tools",
+  "title": "GPT-6 Astra: OpenAI documents its new model for complex agent work",
+  "summary": "Astra brings new controls for long-running workflows. Here is what its documentation means for teams evaluating an upgrade.",
+  "date": "2026-09-07",
+  "category": "Models",
+  "sourceName": "OpenAI model guidance",
+  "sourceUrl": "https://developers.openai.com/api/docs/guides/latest-model",
+  "body": [
+    "OpenAI’s GPT-6 Astra guide describes a model aimed at demanding work across software, research and professional applications. This September 7 documentation briefing is not a claim that the model launched on this date.",
+    "New workflow controls include asynchronous tool calls and instructions sent while a task is running. Applications still execute tools and manage their results; the model does not remove the need for application orchestration.",
+    "For buyers, the useful question is whether a completed task becomes more reliable or cheaper after accounting for retries and review. Aivorix has added an Astra dossier and a comparison with GPT-5.6 Sol; no independent benchmark score is inferred from OpenAI’s positioning."
+  ],
+  "takeaways": [
+    "Astra’s documented changes target multi-step work.",
+    "Compare completed-task quality, cost and review effort.",
+    "Check account access before planning a rollout."
+  ]
+},
   {
     slug: "anthropic-claude-fable-5-1-mythos-5-1-launch",
     title: "Anthropic launches Claude Fable 5.1 and restricted Mythos 5.1",

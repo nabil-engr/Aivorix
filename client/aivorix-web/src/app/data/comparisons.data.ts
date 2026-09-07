@@ -1,4 +1,62 @@
 export const COMPARISONS = [
+{
+  "slug": "gpt-6-astra-vs-gpt-5-6-sol",
+  "title": "GPT-6 Astra vs GPT-5.6 Sol: capability, pricing and upgrade tradeoffs",
+  "left": "gpt-6-astra",
+  "right": "gpt-5-6-sol",
+  "updated": "2026-09-07",
+  "intro": "Compare two OpenAI models using the same API pricing units. This is an upgrade decision, not a comparison of ChatGPT subscription plans.",
+  "verdict": "Evaluate Astra on difficult tasks that currently need retries or human repair. Keep Sol as a cost-conscious baseline for workflows that already meet your quality target. A larger token price alone cannot establish the cost of a successful task.",
+  "bestLeft": "Testing demanding workflows and newer agent controls",
+  "bestRight": "Keeping a lower per-token baseline for established workflows",
+  "rows": [
+    [
+      "Standard API input / 1M tokens",
+      "$10",
+      "$4"
+    ],
+    [
+      "Standard API output / 1M tokens",
+      "$50",
+      "$20"
+    ],
+    [
+      "Cached input / 1M tokens",
+      "$1",
+      "$0.40"
+    ],
+    [
+      "Context / maximum output",
+      "1,050,000 / 128,000 tokens",
+      "1,050,000 / 128,000 tokens"
+    ],
+    [
+      "Knowledge cutoff",
+      "April 30, 2026",
+      "February 16, 2026"
+    ],
+    [
+      "Reasoning options",
+      "low, medium, high, xhigh, max",
+      "none, low, medium, high, xhigh, max"
+    ],
+    [
+      "Billing caveat",
+      "Long-context, cache-write and tool fees can add cost",
+      "Long-context, cache-write and tool fees can add cost"
+    ],
+    [
+      "Aivorix evaluation",
+      "No shared independent score recorded",
+      "Use the same tasks and harness before choosing"
+    ]
+  ],
+  "sources": [
+    "https://developers.openai.com/api/docs/models/compare",
+    "https://developers.openai.com/api/docs/guides/latest-model",
+    "https://developers.openai.com/api/docs/models/gpt-5.6-sol"
+  ]
+},
   {
     slug: "chatgpt-vs-claude",
     title: "ChatGPT vs Claude: which AI assistant should you use in 2026?",

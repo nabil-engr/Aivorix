@@ -65,14 +65,136 @@ export interface ToolDossier {
 }
 
 export const AI_TOOL_DETAILS: Record<string, ToolDossier> = {
+  "gpt-6-astra": {
+  "launched": "Documented by September 7, 2026",
+  "currentRelease": "GPT-6 Astra",
+  "releaseStatus": "Listed in OpenAI documentation; account access varies",
+  "positioning": "An OpenAI model for teams evaluating demanding reasoning and agent workflows.",
+  "modelNote": "Astra is a model; ChatGPT is an application. Model specifications do not establish a subscription’s limits or your account’s access.",
+  "overview": [
+    "Use this dossier to decide what to test before adopting Astra. Start with tasks where your existing system needs substantial correction, then compare the cost and quality of completed work.",
+    "The specification is useful for planning input size and output requirements. It does not establish accuracy on your documents, repository or research questions."
+  ],
+  "timeline": [
+    {
+      "date": "September 7, 2026 review",
+      "title": "Astra added to the Aivorix catalog",
+      "status": "Current",
+      "summary": "Documentation reviewed; this date records our coverage rather than an independently confirmed launch date.",
+      "changes": [
+        "Dedicated model profile",
+        "Upgrade comparison with GPT-5.6 Sol"
+      ],
+      "sourceUrl": "https://developers.openai.com/api/docs/models/gpt-6-astra"
+    }
+  ],
+  "comparisonLabel": "GPT-5.6 Sol to Astra: documented specifications",
+  "comparison": [
+    {
+      "dimension": "Input / output price per 1M tokens",
+      "previous": "$4 / $20",
+      "current": "$10 / $50",
+      "difference": "2.5× standard token rates; total task cost varies"
+    },
+    {
+      "dimension": "Context window",
+      "previous": "1.05M tokens",
+      "current": "1.05M tokens",
+      "difference": "Same published capacity"
+    },
+    {
+      "dimension": "Maximum output",
+      "previous": "128K tokens",
+      "current": "128K tokens",
+      "difference": "Same published limit"
+    }
+  ],
+  "powerHeadline": "Published specifications, with benchmark gaps visible",
+  "powerNote": "Aivorix has not recorded a directly comparable Astra result in the benchmark snapshots shown on the homepage. Missing results are unranked, not zero.",
+  "metrics": [
+    {
+      "value": "1.05M",
+      "label": "Context tokens",
+      "detail": "Published model capacity.",
+      "sourceUrl": "https://developers.openai.com/api/docs/models/gpt-6-astra"
+    },
+    {
+      "value": "128K",
+      "label": "Maximum output tokens",
+      "detail": "Published output limit.",
+      "sourceUrl": "https://developers.openai.com/api/docs/models/gpt-6-astra"
+    },
+    {
+      "value": "Unranked",
+      "label": "Aivorix benchmark coverage",
+      "detail": "No score transferred from an earlier model."
+    }
+  ],
+  "features": [
+    {
+      "name": "Asynchronous tools",
+      "availability": "Application integration required",
+      "howItWorks": "The model can continue independent work while a tool is pending.",
+      "usefulFor": "Workflows with slow external operations.",
+      "caution": "Your application remains responsible for execution and result handling."
+    },
+    {
+      "name": "Mid-turn steering",
+      "availability": "Responses API over WebSocket",
+      "howItWorks": "Additional instructions can redirect ongoing work.",
+      "usefulFor": "Changing requirements during a long task.",
+      "caution": "Validate that completed work remains consistent with the new request."
+    },
+    {
+      "name": "Reasoning controls",
+      "availability": "low through max",
+      "howItWorks": "Choose the reasoning effort for the task.",
+      "usefulFor": "Testing quality and latency tradeoffs.",
+      "caution": "Astra does not offer the none setting."
+    }
+  ],
+  "limitations": [
+    "Specifications are not a guarantee of task accuracy.",
+    "Budget for review, retries and enabled tools.",
+    "Confirm current access and billing in your account."
+  ],
+  "roadmap": [
+    {
+      "title": "Future releases and access",
+      "status": "No public date",
+      "detail": "This dossier does not infer a future release schedule. Check current model documentation before rollout.",
+      "sourceUrl": "https://developers.openai.com/api/docs/models"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Astra model specification",
+      "publisher": "OpenAI",
+      "date": "Reviewed September 7, 2026",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-astra"
+    },
+    {
+      "title": "Astra workflow guidance",
+      "publisher": "OpenAI",
+      "date": "Reviewed September 7, 2026",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model"
+    },
+    {
+      "title": "Model comparison",
+      "publisher": "OpenAI",
+      "date": "Reviewed September 7, 2026",
+      "url": "https://developers.openai.com/api/docs/models/compare"
+    }
+  ]
+},
   chatgpt: {
     launched: "November 30, 2022",
-    currentRelease: "GPT-5.6 family",
-    releaseStatus: "Generally available since July 9, 2026",
+    currentRelease: "GPT-5.6 family / GPT-6 Astra coverage",
+    releaseStatus: "Model availability depends on account and surface",
     positioning:
       "A general-purpose assistant for chat, research, coding, files, images, voice and end-to-end knowledge work.",
     modelNote:
-      "ChatGPT is the product; GPT-5.6 Sol, Terra and Luna are current underlying model tiers. Which tier and reasoning effort you can use depends on the plan and surface.",
+      "ChatGPT is the product. GPT-6 Astra now has a separate Aivorix model dossier alongside the GPT-5.6 family. A model listing does not establish access on every ChatGPT plan.",
     overview: [
       "ChatGPT began as a free research preview built on GPT-3.5 and has grown into a multi-tool workspace rather than a text-only chatbot.",
       "The current GPT-5.6 family separates flagship quality (Sol), balanced everyday work (Terra) and fast low-cost work (Luna). ChatGPT can automatically combine reasoning with web, file, image, code and connected-app tools.",

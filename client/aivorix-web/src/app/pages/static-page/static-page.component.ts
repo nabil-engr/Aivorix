@@ -12,7 +12,7 @@ const PAGES: Record<string, readonly [string, string, string]> = {
   methodology: [
     "Comparison methodology",
     "Our comparisons are workflow-first. We do not manufacture one universal score and call it objective.",
-    "We check official product pages, release notes and help centers; record a verification date; compare pricing units correctly; distinguish consumer subscriptions from API token pricing; flag region-dependent limits; and avoid presenting vendor benchmarks as neutral tests. Editorial verdicts are clearly framed as judgments about fit, not mathematical facts.",
+    "We check official product pages, release notes and help centers; record a verification date; compare pricing units correctly; distinguish consumer subscriptions from API token pricing; flag region-dependent limits; and avoid presenting vendor benchmarks as neutral tests. The All AI tools Utility Index contains editorial estimates of capability, workflow breadth, integrations, accessibility and evidence quality. Other tabs retain the named model and evaluation behind each score. Every catalog entry is listed, but N/A means no comparable result is recorded in that snapshot; it is not a zero, a rank or a claim that the product cannot do the task. Model specifications such as context length are not performance scores.",
   ],
   editorial: [
     "Editorial policy",

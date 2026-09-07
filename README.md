@@ -1,4 +1,6 @@
-<h1><a href="https://nabil-engr.github.io/Aivorix/">Live site</a></h1>
+<h1>Github <a href="https://nabil-engr.github.io/Aivorix/"> Live Site</a></h1>
+<h1>Netlify Free Hosted <a href="https://aivorix.netlify.app/"> Live Site</a></h1>
+
 
 # Aivorix — AI News & Comparison Website
 

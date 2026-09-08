@@ -9,10 +9,10 @@ import { SeoService } from "../../services/seo.service";
   template: `<section class="page-hero">
       <div class="container">
         <span class="eyebrow">AI News</span>
-        <h1>The AI updates worth knowing.</h1>
+        <h1>AI news, explained without the jargon.</h1>
         <p class="lead">
-          Clear, original summaries of important AI launches, business moves and
-          safety developments, with links to the reporting behind each story.
+          Understand what changed, why it matters and whether it affects the AI
+          tools you use. Every story links to its original source.
         </p>
         <input
           class="search"

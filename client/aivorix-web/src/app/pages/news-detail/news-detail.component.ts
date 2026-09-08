@@ -36,18 +36,17 @@ type NewsArticle = (typeof NEWS)[number];
             @for (p of article.body; track p) {
               <p>{{ p }}</p>
             }
-            <h2>Key takeaways</h2>
+            <h2>What this means</h2>
             <ul>
               @for (t of article.takeaways; track t) {
                 <li>{{ t }}</li>
               }
             </ul>
             <div class="source-panel">
-              <h3>Source and verification</h3>
+              <h3>Read the announcement</h3>
               <p>
-                This Aivorix article is an original summary and analysis. The
-                factual release/reporting source is linked below. Product
-                details can change after publication.
+                We explained the update in plain English. Use the original
+                source below for the full announcement and any later changes.
               </p>
               <a
                 class="btn"

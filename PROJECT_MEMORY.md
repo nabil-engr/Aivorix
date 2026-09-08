@@ -1,5 +1,11 @@
 # Aivorix project memory
 
+## News rewrite: 2026-09-08
+
+User rejected the article voice as artificial, especially the sentence “This September 7 documentation briefing is not a claim that the model launched on this date.” Rewrote all 16 existing news stories in shorter, plain-English paragraphs with concrete implications and three direct takeaways. Removed internal fact-checking/editorial-process language from reader-facing copy. News detail now labels the takeaway section “What this means” and explains the source panel more naturally; the news index promises jargon-free explanations.
+
+Added three current, official-source stories: Gemini 3.8 Flash/Cyber (Google, September 2), Grok Bot for Enterprise (SpaceXAI, September 3), and Perplexity Hybrid Compute on Mac (September 1). Total news is 19 and total prerendered routes are 656. Updated the Sonnet 5 article to reflect Anthropic's permanent $2/$10 API price. Content checks enforce readable summary length, three body sections, three takeaways, HTTPS sources, and rejection of the removed internal phrases. Production build and prerender checks passed. Published in Netlify deploy `6a9f9ed5b0abdebdf80bcdd0`; live checks confirmed all three new articles, the rewritten Astra copy and 19 news-sitemap entries.
+
 ## Search Console indexing fix: 2026-09-08
 
 The verified Search Console property is `https://aivorix.netlify.app/`. Live inspection found that canonical tags and robots sitemap references still pointed to `https://aivorix.com`, while Netlify `/sitemap.xml` returned the Angular HTML fallback. Updated frontend canonical/Open Graph/structured-data base URLs and backend base configuration to the Netlify origin. Added generated static `sitemap.xml` (653 URLs with content-derived `lastmod`) and `news-sitemap.xml` (16 news entries), and changed `robots.txt` to reference both Netlify URLs. `scripts/check-content.mjs --sync-catalog` now generates and validates the static sitemap files alongside `SiteCatalog.cs`.

@@ -34,6 +34,14 @@ const comparisonSlugs = new Set(COMPARISON_PROFILES.map(profile => profile.slug)
 for (const items of [AI_TOOLS, NEWS, COMPARISONS]) {
   assert.equal(new Set(items.map(item => item.slug)).size, items.length, 'Duplicate slug');
 }
+for (const article of NEWS) {
+  assert(article.summary.length >= 70 && article.summary.length <= 220, `${article.slug}: summary length`);
+  assert.equal(article.body.length, 3, `${article.slug}: news should have three readable sections`);
+  assert.equal(article.takeaways.length, 3, `${article.slug}: news should have three takeaways`);
+  assert(new URL(article.sourceUrl).protocol === 'https:', `${article.slug}: invalid source`);
+  const copy = `${article.title} ${article.summary} ${article.body.join(' ')}`;
+  assert(!/documentation briefing is not a claim|Aivorix has added|no independent benchmark score is inferred/i.test(copy), `${article.slug}: internal editorial wording copy`);
+}
 for (const comparison of COMPARISONS) {
   assert(comparisonSlugs.has(comparison.left) && comparisonSlugs.has(comparison.right), 'Invalid comparison profile');
   assert.notEqual(comparison.left, comparison.right);

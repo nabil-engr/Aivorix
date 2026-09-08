@@ -1,5 +1,13 @@
 # Validation report
 
+## Update: 2026-09-08 — plain-English news rewrite
+
+- Rewrote every existing article story to, summary, paragraph and takeaway in concise reader-facing language; removed internal documentation-date and benchmark-disclaimer wording from article copy.
+- Added official-source coverage of Gemini 3.8 Flash/Cyber, Grok Bot for Enterprise and Perplexity Hybrid Compute on Mac. News count is now 19.
+- Corrected the Claude Sonnet 5 pricing story to reflect Anthropic's current permanent $2 input / $10 output per million token rate.
+- News UI now uses “What this means” and a shorter source explanation. Automated checks require three readable sections, three takeaways, reasonable summary length and HTTPS sources.
+- Angular production build passed with 656 prerendered routes. Prerender checks confirmed the removed phrase is absent, the new copy is present and the news sitemap contains 19 entries. Netlify deploy `6a9f9ed5b0abdebdf80bcdd0` succeeded; live HTTP checks returned 200 for the news index, rewritten Astra article and all three new stories.
+
 ## Update: 2026-09-08 — Netlify indexing and sitemap repair
 
 - Replaced frontend canonical and structured-data references to the inactive `aivorix.com` origin with the verified Search Console property, `https://aivorix.netlify.app`.

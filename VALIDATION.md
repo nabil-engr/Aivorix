@@ -1,5 +1,13 @@
 # Validation report
 
+## Update: 2026-09-08 — Netlify indexing and sitemap repair
+
+- Replaced frontend canonical and structured-data references to the inactive `aivorix.com` origin with the verified Search Console property, `https://aivorix.netlify.app`.
+- Added static generated `sitemap.xml` with all 653 canonical routes and content-derived `lastmod`, plus a Google News sitemap containing 16 current articles. Robots now references both Netlify sitemap URLs.
+- `scripts/check-content.mjs --sync-catalog` generates and validates the backend catalog and both static sitemap files together.
+- Angular production build and 653-route prerender validation passed. Netlify deploy `6a9f9464ef95548a25b041e1` succeeded.
+- Live checks: homepage canonical uses Netlify; robots points to Netlify; sitemap returns HTTP 200 as `application/xml` with 653 URLs; news sitemap returns HTTP 200 with 16 entries.
+
 ## Update: 2026-09-08 — complete comparison matrix
 
 - Comparison catalog: 35 profiles (28 existing products plus GPT-5.6 Terra, GPT-5.6 Luna, GPT-5.5, Claude Fable 5.1, Claude Opus 5, Claude Sonnet 5 and Claude Haiku 4.5). Every unique pair exists: 596 comparison pages including retained editorial guides.

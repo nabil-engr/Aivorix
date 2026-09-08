@@ -1,5 +1,11 @@
 # Aivorix project memory
 
+## Search Console indexing fix: 2026-09-08
+
+The verified Search Console property is `https://aivorix.netlify.app/`. Live inspection found that canonical tags and robots sitemap references still pointed to `https://aivorix.com`, while Netlify `/sitemap.xml` returned the Angular HTML fallback. Updated frontend canonical/Open Graph/structured-data base URLs and backend base configuration to the Netlify origin. Added generated static `sitemap.xml` (653 URLs with content-derived `lastmod`) and `news-sitemap.xml` (16 news entries), and changed `robots.txt` to reference both Netlify URLs. `scripts/check-content.mjs --sync-catalog` now generates and validates the static sitemap files alongside `SiteCatalog.cs`.
+
+Angular production build and 653-route prerender checks passed. Published as Netlify production deploy `6a9f9464ef95548a25b041e1`; live checks confirmed the Netlify homepage canonical, XML content type, 653 sitemap URLs, 16 news entries and current bundle `main-V66LLUFV.js`. Search Console reporting can still show “Processing data” for a new property until Google finishes collection.
+
 ## Complete comparison matrix: 2026-09-08
 
 The comparison system now has 35 selectable profiles: all 28 tool catalog entries plus GPT-5.6 Terra, GPT-5.6 Luna, GPT-5.5, Claude Fable 5.1, Claude Opus 5, Claude Sonnet 5 and Claude Haiku 4.5. Astra and Sol reuse their existing catalog identities. Programmatic canonical pairing covers every unique profile pair while retaining hand-written editorial overrides, producing 596 comparison pages and 653 total prerendered routes.

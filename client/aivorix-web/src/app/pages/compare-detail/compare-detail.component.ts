@@ -178,8 +178,8 @@ export class CompareDetailComponent implements OnInit {
       jsonLd: { "@context": "https://schema.org", "@graph": [
         { "@type": "Article", headline: this.c.title, dateModified: this.c.updated, author: { "@type": "Organization", name: "Aivorix Editorial" }, about: [this.left.name, this.right.name] },
         { "@type": "BreadcrumbList", itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Comparisons", item: "https://aivorix.com/comparisons" },
-          { "@type": "ListItem", position: 2, name: this.c.title, item: `https://aivorix.com/comparisons/${this.c.slug}` },
+          { "@type": "ListItem", position: 1, name: "Comparisons", item: "https://aivorix.netlify.app/comparisons" },
+          { "@type": "ListItem", position: 2, name: this.c.title, item: `https://aivorix.netlify.app/comparisons/${this.c.slug}` },
         ] },
         { "@type": "FAQPage", mainEntity: this.faqs.map(faq => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })) },
       ] },

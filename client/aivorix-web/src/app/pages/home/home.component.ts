@@ -871,7 +871,7 @@ export class HomeComponent implements OnInit {
         "@context": "https://schema.org",
         "@type": "WebSite",
         name: "Aivorix",
-        url: "https://aivorix.com",
+        url: "https://aivorix.netlify.app",
         description:
           "Source-backed AI benchmark charts, news and product comparisons",
       },

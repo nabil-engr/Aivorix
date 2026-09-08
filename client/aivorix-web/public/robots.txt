@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aivorix.com/sitemap.xml
-Sitemap: https://aivorix.com/news-sitemap.xml
+Sitemap: https://aivorix.netlify.app/sitemap.xml
+Sitemap: https://aivorix.netlify.app/news-sitemap.xml

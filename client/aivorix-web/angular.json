@@ -23,6 +23,7 @@
               "allowedHosts": [
                 "aivorix.com",
                 "www.aivorix.com",
+                "aivorix.netlify.app",
                 "localhost",
                 "127.0.0.1"
               ]

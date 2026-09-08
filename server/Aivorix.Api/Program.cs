@@ -117,7 +117,7 @@ app.MapPost("/api/leads", async (
     return Results.Ok(new { ok = true });
 }).RequireRateLimiting("forms");
 
-string BaseUrl() => builder.Configuration["Site:BaseUrl"]?.TrimEnd('/') ?? "https://aivorix.com";
+string BaseUrl() => builder.Configuration["Site:BaseUrl"]?.TrimEnd('/') ?? "https://aivorix.netlify.app";
 
 app.MapGet("/sitemap.xml", () =>
 {

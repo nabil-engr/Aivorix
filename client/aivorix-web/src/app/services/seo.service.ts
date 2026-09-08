@@ -13,7 +13,7 @@ interface SeoOptions {
 
 @Injectable({ providedIn: 'root' })
 export class SeoService {
-  private readonly base = 'https://aivorix.com';
+  private readonly base = 'https://aivorix.netlify.app';
 
   constructor(
     private readonly meta: Meta,

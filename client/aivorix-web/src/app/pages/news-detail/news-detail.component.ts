@@ -299,7 +299,7 @@ export class NewsDetailComponent implements OnInit {
         dateModified: this.article.date,
         author: { "@type": "Organization", name: "Aivorix Editorial" },
         publisher: { "@type": "Organization", name: "Aivorix" },
-        mainEntityOfPage: "https://aivorix.com/news/" + this.article.slug,
+        mainEntityOfPage: "https://aivorix.netlify.app/news/" + this.article.slug,
       },
     });
   }

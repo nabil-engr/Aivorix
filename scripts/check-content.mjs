@@ -23,19 +23,33 @@ function readData(name) {
 const { AI_TOOLS } = readData('tools.data');
 const { NEWS } = readData('news.data');
 const { COMPARISONS } = readData('comparisons.data');
+const { COMPARISON_PROFILES } = readData('comparison-profiles.data');
 const { HOME_BENCHMARKS, PRODUCT_SIGNALS } = readData('home-benchmarks.data');
 const { AI_TOOL_DETAILS } = readData('tool-details.data');
 const { TASK_FIT_VIEWS, RANKING_RUBRICS, scoreTool } = readData('task-fit.data');
 const { RANKING_EVIDENCE } = readData('ranking-evidence.data');
 const { PUBLISHED_BENCHMARKS } = readData('published-benchmarks.data');
 const slugs = new Set(AI_TOOLS.map(tool => tool.slug));
+const comparisonSlugs = new Set(COMPARISON_PROFILES.map(profile => profile.slug));
 for (const items of [AI_TOOLS, NEWS, COMPARISONS]) {
   assert.equal(new Set(items.map(item => item.slug)).size, items.length, 'Duplicate slug');
 }
 for (const comparison of COMPARISONS) {
-  assert(slugs.has(comparison.left) && slugs.has(comparison.right), 'Invalid comparison tool');
+  assert(comparisonSlugs.has(comparison.left) && comparisonSlugs.has(comparison.right), 'Invalid comparison profile');
   assert.notEqual(comparison.left, comparison.right);
+  assert(comparison.rows.length >= 6, 'Comparison needs useful side-by-side fields');
+  assert(comparison.sources.length >= 2 && comparison.sources.every(source => new URL(source).protocol === 'https:'), 'Comparison needs official HTTPS sources');
 }
+assert.equal(new Set(COMPARISON_PROFILES.map(profile => profile.slug)).size, COMPARISON_PROFILES.length, 'Duplicate comparison profile');
+assert(COMPARISON_PROFILES.some(profile => profile.slug === 'gpt-5-6-terra'));
+assert(COMPARISON_PROFILES.some(profile => profile.slug === 'gpt-5-6-luna'));
+assert(COMPARISON_PROFILES.some(profile => profile.slug === 'gpt-5-5'));
+assert(COMPARISON_PROFILES.some(profile => profile.slug === 'claude-fable-5-1'));
+assert(COMPARISON_PROFILES.some(profile => profile.slug === 'claude-opus-5'));
+assert(COMPARISON_PROFILES.some(profile => profile.slug === 'claude-sonnet-5'));
+assert(COMPARISON_PROFILES.some(profile => profile.slug === 'claude-haiku-4-5'));
+const comparisonPairCount = new Set(COMPARISONS.map(item => [item.left, item.right].sort().join('::'))).size;
+assert.equal(comparisonPairCount, COMPARISON_PROFILES.length * (COMPARISON_PROFILES.length - 1) / 2, 'Every comparison pair must exist');
 for (const view of HOME_BENCHMARKS) {
   assert.deepEqual(new Set(view.entries.map(entry => entry.toolSlug)), slugs, `${view.slug}: incomplete coverage`);
   assert.equal(view.entries.length, slugs.size, 'Duplicate benchmark tool');
@@ -109,4 +123,4 @@ if (process.argv.includes('--prerender')) {
   assert(home.includes('Task-fit scores') && home.includes('Published benchmarks') && home.includes('Why this score?'), 'Missing ranking controls/evidence');
   assert(!home.includes('Not ranked') && !home.includes('>N/A<'), 'Default ranking must score every entry');
 }
-console.log(`Content checks passed: ${AI_TOOLS.length} tools, ${NEWS.length} news, ${COMPARISONS.length} comparisons, ${paths.length} routes; all task-fit views cover the catalog, published results retain their sources.`);
+console.log(`Content checks passed: ${AI_TOOLS.length} tools, ${COMPARISON_PROFILES.length} comparison profiles, ${COMPARISONS.length} comparisons, ${NEWS.length} news, ${paths.length} routes.`);

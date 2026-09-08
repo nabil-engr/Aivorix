@@ -1,4 +1,6 @@
-export const COMPARISONS = [
+import { COMPARISON_PROFILES } from "./comparison-profiles.data";
+
+const EDITORIAL_COMPARISONS = [
 {
   "slug": "gpt-6-astra-vs-gpt-5-6-sol",
   "title": "GPT-6 Astra vs GPT-5.6 Sol: capability, pricing and upgrade tradeoffs",
@@ -254,8 +256,8 @@ export const COMPARISONS = [
   {
     slug: "gpt-5-6-sol-vs-claude-sonnet-5",
     title: "GPT-5.6 Sol vs Claude Sonnet 5: flagship model comparison",
-    left: "chatgpt",
-    right: "claude",
+    left: "gpt-5-6-sol",
+    right: "claude-sonnet-5",
     updated: "2026-08-24",
     intro:
       "This model-focused comparison avoids declaring a universal benchmark winner. Both providers position these models for demanding coding and knowledge work, but pricing, tool ecosystems and effort modes differ.",
@@ -522,3 +524,53 @@ export const COMPARISONS = [
     ],
   },
 ] as const;
+
+const pairKey = (left: string, right: string) => [left, right].sort().join("::");
+const editorialPairs = new Set(EDITORIAL_COMPARISONS.map(item => pairKey(item.left, item.right)));
+
+const GENERATED_COMPARISONS = COMPARISON_PROFILES.flatMap((left, leftIndex) =>
+  COMPARISON_PROFILES.slice(leftIndex + 1)
+    .filter(right => !editorialPairs.has(pairKey(left.slug, right.slug)))
+    .map(right => ({
+      slug: `${left.slug}-vs-${right.slug}`,
+      title: `${left.name} vs ${right.name}: pricing, features and best use cases`,
+      left: left.slug,
+      right: right.slug,
+      updated: "2026-09-08",
+      intro: `Compare ${left.name} and ${right.name} side by side across pricing, context, capabilities, speed and practical fit. The right choice depends on your workload, plan and required product surface.`,
+      verdict: `Choose ${left.name} when ${left.bestFor.toLowerCase()} is the closer match. Choose ${right.name} when ${right.bestFor.toLowerCase()} matters more. Test both on the same real tasks before moving a production workflow.`,
+      bestLeft: left.bestFor,
+      bestRight: right.bestFor,
+      rows: [
+        ["Provider", left.provider, right.provider],
+        ["Type", `${left.kind} · ${left.category}`, `${right.kind} · ${right.category}`],
+        ["Pricing summary", left.pricing, right.pricing],
+        ["Input price", left.inputPrice, right.inputPrice],
+        ["Cached input", left.cachedInput, right.cachedInput],
+        ["Output price", left.outputPrice, right.outputPrice],
+        ["Context window", left.context, right.context],
+        ["Maximum output", left.maxOutput, right.maxOutput],
+        ["Knowledge cutoff", left.knowledgeCutoff, right.knowledgeCutoff],
+        ["Reasoning", left.reasoning, right.reasoning],
+        ["Relative speed", left.speed, right.speed],
+        ["Input modalities", left.input, right.input],
+        ["Output modalities", left.output, right.output],
+        ["Tools and integrations", left.tools, right.tools],
+        ["API / access", left.endpoints, right.endpoints],
+        ["Best fit", left.bestFor, right.bestFor],
+      ],
+      sources: [left.source, right.source],
+      searchIntents: [
+        `${left.name} vs ${right.name}`,
+        `${right.name} vs ${left.name}`,
+        `${left.name} or ${right.name}`,
+        `${left.name} vs ${right.name} pricing`,
+        `${left.name} vs ${right.name} for coding`,
+        `${left.name} vs ${right.name} context window`,
+        `is ${left.name} better than ${right.name}`,
+      ],
+      generated: true,
+    })),
+);
+
+export const COMPARISONS = [...EDITORIAL_COMPARISONS, ...GENERATED_COMPARISONS];

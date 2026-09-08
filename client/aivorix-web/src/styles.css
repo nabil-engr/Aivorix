@@ -861,6 +861,19 @@ footer {
   margin: 0;
   line-height: 1.38;
 }
+.comparison-detail .profile-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 18px 0 34px;
+}
+.comparison-detail .profile-summary-grid .card { padding: 22px; }
+.comparison-detail .profile-summary-grid small { color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.comparison-detail .profile-summary-grid h3 { margin: 8px 0; }
+.comparison-detail .faq-list { border-top: 1px solid var(--line-strong); margin-bottom: 34px; }
+.comparison-detail .faq-list details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+.comparison-detail .faq-list summary { cursor: pointer; font-weight: 800; }
+.comparison-detail .faq-list p { color: var(--muted); margin: 12px 0 0; }
 .comparison-section-heading {
   display: flex;
   align-items: baseline;
@@ -945,6 +958,7 @@ footer {
   .comparison-detail .winner-grid {
     margin-bottom: 40px;
   }
+  .comparison-detail .profile-summary-grid { grid-template-columns: 1fr; }
   .comparison-detail .winner-grid .card {
     min-height: auto;
   }

@@ -1,5 +1,13 @@
 # Validation report
 
+## Update: 2026-09-08 — complete comparison matrix
+
+- Comparison catalog: 35 profiles (28 existing products plus GPT-5.6 Terra, GPT-5.6 Luna, GPT-5.5, Claude Fable 5.1, Claude Opus 5, Claude Sonnet 5 and Claude Haiku 4.5). Every unique pair exists: 596 comparison pages including retained editorial guides.
+- Compare builder: three synchronized selectors, provider/model summary cards and aligned capability, pricing, context and access rows. Selected pairs link to their dedicated guides.
+- SEO: pair-specific titles/descriptions, canonical routes, Article + BreadcrumbList + FAQPage structured data, question-led comparison copy and a searchable CollectionPage with ItemList metadata.
+- Evidence: requested OpenAI model facts use official OpenAI Docs model pages; Claude model facts use official Anthropic/Claude Platform pages. Product-level fields preserve their existing official sources and clearly label model/plan-dependent values.
+- Validation: content checks passed for all 596 pairs and 653 routes; Angular production build prerendered all 653 routes. Representative Terra-vs-Fable output contains title, pricing, canonical, FAQ and breadcrumb data. Netlify production deploy `6a9f8f3115d51b329933a749` succeeded; live HTTP checks returned 200 for the builder and sample pair. In-app browser control was unavailable, so no interactive visual click-through was claimed.
+
 ## Update: 2026-09-07 — source-backed ranking views
 
 - Default homepage: 5 task-fit categories, each scoring all 28 catalog entries with an explicit weighted feature-coverage rubric. Scores are editorial calculations, not third-party ratings or measured accuracy.

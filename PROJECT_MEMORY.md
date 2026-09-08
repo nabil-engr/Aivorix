@@ -1,5 +1,11 @@
 # Aivorix project memory
 
+## Complete comparison matrix: 2026-09-08
+
+The comparison system now has 35 selectable profiles: all 28 tool catalog entries plus GPT-5.6 Terra, GPT-5.6 Luna, GPT-5.5, Claude Fable 5.1, Claude Opus 5, Claude Sonnet 5 and Claude Haiku 4.5. Astra and Sol reuse their existing catalog identities. Programmatic canonical pairing covers every unique profile pair while retaining hand-written editorial overrides, producing 596 comparison pages and 653 total prerendered routes.
+
+The /compare builder compares three choices in aligned cards/rows for capability, token pricing where applicable, context and access. Comparison details resolve model and product profiles from comparison-profiles.data.ts, show consistent side-by-side fields, FAQs, official sources, and Article/BreadcrumbList/FAQPage schema. /comparisons is searchable and exposes CollectionPage/ItemList metadata. `scripts/check-content.mjs` verifies profile uniqueness, requested models, official HTTPS sources, useful rows and complete nC2 pair coverage. `SiteCatalog.cs` was regenerated. Production build and prerender checks passed; direct browser interaction remained unavailable. Published to Netlify production in deploy `6a9f8f3115d51b329933a749`; live HTTP checks confirmed the new bundle, three selectors, 596 count and a representative Terra-vs-Fable page.
+
 ## Latest ranking change: 2026-09-07
 
 Published to production in Netlify deploy 6a9ea3ff1b5e06135a5d394b (https://aivorix.netlify.app). Final Angular entry bundle: main-2B3K3KJO.js.

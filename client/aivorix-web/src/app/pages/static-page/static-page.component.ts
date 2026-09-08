@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { SeoService } from "../../services/seo.service";
+import { RANKING_RUBRICS, CAPABILITY_LABELS } from "../../data/task-fit.data";
 
 const PAGES: Record<string, readonly [string, string, string]> = {
   about: [
@@ -12,7 +13,7 @@ const PAGES: Record<string, readonly [string, string, string]> = {
   methodology: [
     "Comparison methodology",
     "Our comparisons are workflow-first. We do not manufacture one universal score and call it objective.",
-    "We check official product pages, release notes and help centers; record a verification date; compare pricing units correctly; distinguish consumer subscriptions from API token pricing; flag region-dependent limits; and avoid presenting vendor benchmarks as neutral tests. The All AI tools Utility Index contains editorial estimates of capability, workflow breadth, integrations, accessibility and evidence quality. Other tabs retain the named model and evaluation behind each score. Every catalog entry is listed, but N/A means no comparable result is recorded in that snapshot; it is not a zero, a rank or a claim that the product cannot do the task. Model specifications such as context length are not performance scores.",
+    "We publish two distinct views: task-fit scores for the whole catalog, and original results for models included in named benchmarks. Task-fit scores count documented features using the weights below. The weights are Aivorix editorial choices; provider documentation supports the feature inputs. We have not run a laboratory evaluation or reproduced a third-party review score.",
   ],
   editorial: [
     "Editorial policy",
@@ -65,6 +66,30 @@ const PAGES: Record<string, readonly [string, string, string]> = {
     <section class="section">
       <div class="container article-width article-body">
         <p>{{ page[2] }}</p>
+
+        @if (key === "methodology") {
+          <section>
+            <h2>How other ranking sites score products</h2>
+            <p><a href="https://documentation.g2.com/docs/research-scoring-methodologies" target="_blank" rel="noopener">G2</a> combines user satisfaction and market presence within product categories. Its review-based score is different from a coding or reasoning test.</p>
+            <p><a href="https://artificialanalysis.ai/methodology/capability-indices" target="_blank" rel="noopener">Artificial Analysis</a> combines independently run evaluations with use-case weights. Aivorix does not claim to reproduce that methodology or its results through feature counting.</p>
+            <h2>Our task-fit formula</h2>
+            <p>Score = sum of weights for criteria supported by the linked provider evidence. Each criterion receives its full weight or zero; weights total 100 in every category. The same rubric applies to every catalog entry. We do not normalize to the current leader or add a popularity bonus.</p>
+            <p>A zero means no supporting feature evidence has been recorded for that criterion. It can reflect a specialist product or a gap in our review; it does not prove the product is incapable. A score of 100 means all five criteria are documented, not perfect quality. Equal scores share a competition rank (1, 1, 3); tied entries are displayed alphabetically.</p>
+            @for (rubric of rankingRubrics; track rubric.slug) {
+              <h3>{{ rubric.title }}</h3>
+              <ul>
+                @for (item of rubric.criteria; track item.key) {
+                  <li>{{ capabilityLabels[item.key] }}: {{ item.weight }} points</li>
+                }
+              </ul>
+            }
+            <h2>Evidence boundaries</h2>
+            <p>Every homepage row links the reviewed source and states its product surface. An API model may require application integration; a product feature may require a paid plan. Code execution means a documented hosted runtime or terminal, not merely an API caller running its own function. Repository support means a documented coding workflow across repository files, not a generic file upload.</p>
+            <p>Provider feature descriptions are not hands-on tests. Citation support does not guarantee accurate citations, and the presence of a reasoning mode does not establish reasoning quality. Review scope and feature support were checked September 7, 2026. Source publication dates can be older.</p>
+            <h2>Published benchmarks</h2>
+            <p>The separate benchmark view uses <a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener">OpenAI's Astra evaluation tables</a>, with model names, evaluation versions and provider-report attribution. AA Intelligence Index, BrowseComp, OSWorld and DeepSWE have different tasks and units; their values are never averaged into the task-fit score. Only models with reported results appear in that view. Different provider harnesses, model effort and production app settings can change outcomes.</p>
+          </section>
+        }
 
         @if (key === "contact") {
           <form
@@ -214,6 +239,8 @@ const PAGES: Record<string, readonly [string, string, string]> = {
   ],
 })
 export class StaticPageComponent implements OnInit {
+  readonly rankingRubrics = RANKING_RUBRICS;
+  readonly capabilityLabels = CAPABILITY_LABELS;
   key = "";
   page = PAGES["404"];
   name = "";

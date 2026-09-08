@@ -110,7 +110,7 @@ export const AI_TOOL_DETAILS: Record<string, ToolDossier> = {
     }
   ],
   "powerHeadline": "Published specifications, with benchmark gaps visible",
-  "powerNote": "Aivorix has not recorded a directly comparable Astra result in the benchmark snapshots shown on the homepage. Missing results are unranked, not zero.",
+  "powerNote": "The homepage now includes provider-published Astra benchmark results alongside a separate feature-coverage ranking. Benchmark scores retain their evaluation and model settings.",
   "metrics": [
     {
       "value": "1.05M",
@@ -125,9 +125,10 @@ export const AI_TOOL_DETAILS: Record<string, ToolDossier> = {
       "sourceUrl": "https://developers.openai.com/api/docs/models/gpt-6-astra"
     },
     {
-      "value": "Unranked",
-      "label": "Aivorix benchmark coverage",
-      "detail": "No score transferred from an earlier model."
+      "value": "74.1%",
+      "label": "DeepSWE v1.1",
+      "detail": "OpenAI-reported coding result; not an Aivorix test.",
+      "sourceUrl": "https://openai.com/index/gpt-6-astra/"
     }
   ],
   "features": [
@@ -167,6 +168,12 @@ export const AI_TOOL_DETAILS: Record<string, ToolDossier> = {
     }
   ],
   "sources": [
+    {
+      "title": "Astra published evaluation tables",
+      "publisher": "OpenAI",
+      "date": "Reviewed September 7, 2026",
+      "url": "https://openai.com/index/gpt-6-astra/"
+    },
     {
       "title": "Astra model specification",
       "publisher": "OpenAI",

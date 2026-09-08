@@ -1,5 +1,17 @@
 # Aivorix project memory
 
+## Latest ranking change: 2026-09-07
+
+Published to production in Netlify deploy 6a9ea3ff1b5e06135a5d394b (https://aivorix.netlify.app). Final Angular entry bundle: main-2B3K3KJO.js.
+
+User asked to replace missing ranks using other websites' data. Researched G2 satisfaction/market-presence scoring and Artificial Analysis weighted evaluations. Default homepage now uses TASK_FIT_VIEWS from task-fit.data.ts: all 28 tools scored across five categories by a disclosed weighted, binary documented-feature rubric. These are Aivorix feature-coverage scores, not third-party review ratings or performance tests. Zero means no recorded criterion evidence, not inability; ties share competition rank.
+
+ranking-evidence.data.ts stores per-tool primary sources, capability keys, summaries and plan/product scope. Published benchmark mode uses published-benchmarks.data.ts: current OpenAI Astra table values, named tested models and evaluation versions. Astra scores: AA v4.1.1 61.2, BrowseComp 91.5%, OSWorld 72.6%, DeepSWE 74.1%. Only reported models appear in this mode. Old HOME_BENCHMARKS remains historical data, no longer the homepage's displayed ranking. Methodology and per-row expandable sources explain both views. Astra dossier and signal now include its published coding result. Content checks cover points, sources, sorting, ties and all catalog entries; Angular build passed with 68 routes.
+
+## Live deployment: 2026-09-07
+
+Published Astra/benchmark changes to https://aivorix.netlify.app using Netlify CLI production deploy 6a9ea03d5356e805e6ade890. Correct site ID is e660d5f4-7c8e-4e4a-ac16-8ce8a0e5f178; local .netlify/state.json was corrected from a stale ID. Verified live HTTP 200 and Astra content on homepage, Astra dossier, Astra news, Astra-vs-Sol comparison and /compare; homepage includes the updated catalog-count label. Earlier notes saying no deployment are superseded by this entry.
+
 ## Latest change: 2026-09-07 — GPT-6 Astra
 
 User requested all tools in every benchmark category and Astra coverage across news, comparisons, dossiers and compare builder. Implemented 28 catalog entries (added Astra and GPT-5.6 Sol), 16 news, 11 comparisons and 68 prerendered routes. Builder defaults to Astra vs Sol. Full Astra dossier and documentation briefing use official developers.openai.com sources verified September 7; do not treat briefing date as launch date.

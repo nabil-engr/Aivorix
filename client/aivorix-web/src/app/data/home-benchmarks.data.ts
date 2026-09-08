@@ -7,6 +7,9 @@ export interface BenchmarkEntry {
   score: number | null;
   displayScore: string;
   note: string;
+  rank?: number;
+  evidence?: readonly { url: string; summary: string }[];
+  breakdown?: readonly { label: string; weight: number; points: number; sources: readonly { url: string; summary: string }[] }[];
 }
 
 export interface BenchmarkView {
@@ -479,9 +482,9 @@ export const HOME_BENCHMARKS: readonly BenchmarkView[] = RECORDED_BENCHMARKS.map
 
 export const PRODUCT_SIGNALS: readonly ProductSignal[] = [
   {
-    toolSlug: "gpt-6-astra", tool: "GPT-6 Astra", value: "1.05M",
-    metric: "Context tokens", context: "Model specification · not a benchmark score",
-    sourceName: "OpenAI", sourceUrl: "https://developers.openai.com/api/docs/models/gpt-6-astra",
+    toolSlug: "gpt-6-astra", tool: "GPT-6 Astra", value: "74.1%",
+    metric: "DeepSWE v1.1", context: "Provider-reported · reviewed September 7, 2026",
+    sourceName: "OpenAI evaluation", sourceUrl: "https://openai.com/index/gpt-6-astra/",
   },
   {
     toolSlug: "gpt-5-6-sol", tool: "GPT-5.6 Sol", value: "1.05M",

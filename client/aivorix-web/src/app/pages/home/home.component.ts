@@ -4,11 +4,12 @@ import { RouterLink } from "@angular/router";
 import { COMPARISONS } from "../../data/comparisons.data";
 import {
   BenchmarkView,
-  HOME_BENCHMARKS,
   PRODUCT_SIGNALS,
 } from "../../data/home-benchmarks.data";
 import { NEWS } from "../../data/news.data";
 import { AI_TOOLS } from "../../data/tools.data";
+import { TASK_FIT_VIEWS } from "../../data/task-fit.data";
+import { PUBLISHED_BENCHMARKS } from "../../data/published-benchmarks.data";
 import { SeoService } from "../../services/seo.service";
 
 @Component({
@@ -39,8 +40,14 @@ import { SeoService } from "../../services/seo.service";
         </div>
 
         <div class="benchmark-console">
+          <div class="ranking-modes" role="group" aria-label="Score type">
+            <button type="button" [class.active]="scoreMode === 'fit'" [attr.aria-pressed]="scoreMode === 'fit'" (click)="setScoreMode('fit')">Task-fit scores · all {{ tools.length }}</button>
+            <button type="button" [class.active]="scoreMode === 'published'" [attr.aria-pressed]="scoreMode === 'published'" (click)="setScoreMode('published')">Published benchmarks</button>
+            <span>{{ scoreMode === 'fit' ? 'Feature evidence + visible scoring formula' : 'Original model results + named evaluations' }}</span>
+          </div>
           <div
             class="benchmark-tabs"
+            [style.--tab-count]="benchmarks.length"
             role="tablist"
             aria-label="Benchmark category"
           >
@@ -88,7 +95,7 @@ import { SeoService } from "../../services/seo.service";
                       class="bar-label"
                       [routerLink]="['/tools', entry.toolSlug]"
                     >
-                      <span class="rank">{{ entry.score === null ? '—' : rank + 1 }}</span>
+                      <span class="rank">{{ entry.rank ?? rank + 1 }}</span>
                       <span
                         ><strong>{{ entry.tool }}</strong
                         ><small>{{ entry.model }}</small></span
@@ -109,7 +116,7 @@ import { SeoService } from "../../services/seo.service";
                       >
                         <span
                           class="bar-fill"
-                          [class.leader]="rank === 0"
+                          [class.leader]="entry.rank === 1"
                           [style.width.%]="
                             barWidth(entry.score, currentBenchmark.max)
                           "
@@ -124,6 +131,31 @@ import { SeoService } from "../../services/seo.service";
                       <small>{{ entry.note }}</small>
                     </div>
                   </div>
+                  @if (entry.evidence?.length) {
+                    <details class="score-evidence">
+                      <summary>Why this score? <span>{{ entry.tool }}</span></summary>
+                      <p>{{ entry.model }}</p>
+                      @if (entry.breakdown) {
+                        <ul class="score-breakdown">
+                          @for (item of entry.breakdown; track item.label) {
+                            <li>
+                              <span>{{ item.label }}</span><strong>{{ item.points }} / {{ item.weight }}</strong>
+                              <small>{{ item.points ? 'Documented' : 'No supporting evidence recorded' }}</small>
+                              @for (source of item.sources; track source.url) {
+                                <small><a [href]="source.url" target="_blank" rel="noopener">Supporting source ↗</a></small>
+                              }
+                            </li>
+                          }
+                        </ul>
+                        <p>Points measure documented coverage, not test accuracy. A zero can mean a specialist focus or an evidence gap. Access may require a paid plan or API setup.</p>
+                      }
+                      <ul>
+                        @for (source of entry.evidence; track source.url) {
+                          <li><a [href]="source.url" target="_blank" rel="noopener">{{ source.summary }} ↗</a></li>
+                        }
+                      </ul>
+                    </details>
+                  }
                 }
               </div>
             </div>
@@ -141,7 +173,7 @@ import { SeoService } from "../../services/seo.service";
                   <dd>{{ currentBenchmark.verified }}</dd>
                 </div>
                 <div>
-                  <dt>Catalog entries</dt>
+                  <dt>{{ scoreMode === 'fit' ? 'Catalog entries' : 'Reported model entries' }}</dt>
                   <dd>{{ currentBenchmark.entries.length }}</dd>
                 </div>
                 <div>
@@ -154,14 +186,12 @@ import { SeoService } from "../../services/seo.service";
                 target="_blank"
                 rel="nofollow noopener"
               >
-                Open benchmark source <span aria-hidden="true">↗</span>
+                {{ scoreMode === 'fit' ? 'Read scoring methodology' : 'Open benchmark source' }} <span aria-hidden="true">↗</span>
               </a>
               <div class="fairness-note">
                 <strong>Fair comparison rule</strong>
                 <span
-                  >Scores are comparable only inside the currently selected
-                  tab. N/A means no comparable score is recorded here, not zero
-                  performance. Historical results retain their tested model.</span
+                  >{{ scoreMode === 'fit' ? 'Aivorix chooses the weights; provider pages support the feature inputs. This is not a G2 rating or a laboratory benchmark. Equal scores share rank.' : 'Compare only within this named evaluation. Scores belong to the displayed model, not every version or app from its provider.' }}</span
                 >
               </div>
             </aside>
@@ -370,7 +400,7 @@ import { SeoService } from "../../services/seo.service";
     }
     .benchmark-tabs {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(var(--tab-count, 5), minmax(0, 1fr));
       border-bottom: 1px solid var(--line-strong);
       background: var(--surface-2);
     }
@@ -542,6 +572,18 @@ import { SeoService } from "../../services/seo.service";
       font-size: 1.15rem;
       text-align: right;
     }
+    .ranking-modes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 16px; border-bottom: 1px solid var(--line); background: var(--surface); }
+    .ranking-modes button { border: 1px solid var(--line-strong); background: transparent; color: var(--text); padding: 10px 14px; cursor: pointer; border-radius: 4px; font-weight: 700; }
+    .ranking-modes button.active { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+    .ranking-modes > span { color: var(--muted); font-size: 0.75rem; margin-left: auto; }
+    .score-evidence { padding: 0 0 12px 33px; font-size: 0.78rem; color: var(--muted); }
+    .score-evidence summary { cursor: pointer; color: var(--accent); font-weight: 700; }
+    .score-evidence summary span { color: var(--muted); font-weight: 400; margin-left: 6px; }
+    .score-evidence a { text-decoration: underline; text-underline-offset: 3px; }
+    .score-evidence p { margin: 12px 0; }
+    .score-breakdown { list-style: none; padding: 0; }
+    .score-breakdown li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .score-breakdown small { grid-column: 1 / -1; }
     .unscored-label {
       color: var(--muted);
       font-size: 0.75rem;
@@ -800,9 +842,12 @@ export class HomeComponent implements OnInit {
   readonly news = [...NEWS].sort((a, b) => b.date.localeCompare(a.date));
   readonly comps = COMPARISONS;
   readonly tools = AI_TOOLS;
-  readonly benchmarks = HOME_BENCHMARKS;
+  scoreMode: 'fit' | 'published' = 'fit';
+  get benchmarks(): readonly BenchmarkView[] {
+    return this.scoreMode === 'fit' ? TASK_FIT_VIEWS : PUBLISHED_BENCHMARKS;
+  }
   readonly productSignals = PRODUCT_SIGNALS;
-  selectedBenchmarkSlug = HOME_BENCHMARKS[0].slug;
+  selectedBenchmarkSlug = TASK_FIT_VIEWS[0].slug;
   email = "";
   message = "";
 
@@ -810,17 +855,17 @@ export class HomeComponent implements OnInit {
 
   get currentBenchmark(): BenchmarkView {
     return (
-      HOME_BENCHMARKS.find(
+      this.benchmarks.find(
         (benchmark) => benchmark.slug === this.selectedBenchmarkSlug,
-      ) ?? HOME_BENCHMARKS[0]
+      ) ?? this.benchmarks[0]
     );
   }
 
   ngOnInit(): void {
     this.seo.set({
-      title: "AI Benchmarks by Task — ChatGPT, Claude, Gemini & More",
+      title: "AI Tool Rankings, Task-fit Scores & Published Benchmarks",
       description:
-        "Compare leading AI tools across independent intelligence, deep research, tool-use and coding-agent benchmarks with visible sources and methodology notes.",
+        "Compare all AI tools with transparent task-fit scoring, source-linked feature evidence and separate published model benchmarks.",
       path: "/",
       jsonLd: {
         "@context": "https://schema.org",
@@ -835,6 +880,13 @@ export class HomeComponent implements OnInit {
 
   selectBenchmark(slug: string): void {
     this.selectedBenchmarkSlug = slug;
+  }
+
+  setScoreMode(mode: 'fit' | 'published'): void {
+    this.scoreMode = mode;
+    if (!this.benchmarks.some(view => view.slug === this.selectedBenchmarkSlug)) {
+      this.selectedBenchmarkSlug = this.benchmarks[0].slug;
+    }
   }
 
   get scoredCount(): number {

@@ -1,5 +1,14 @@
 # Validation report
 
+## Update: 2026-09-07 — source-backed ranking views
+
+- Default homepage: 5 task-fit categories, each scoring all 28 catalog entries with an explicit weighted feature-coverage rubric. Scores are editorial calculations, not third-party ratings or measured accuracy.
+- Evidence: ranking-evidence.data.ts stores reviewed primary URLs, short feature summaries, credited capability keys and product/plan scope. task-fit.data.ts computes points and competition ranks; ties share rank.
+- Separate published-benchmark mode: AA Intelligence Index v4.1.1, BrowseComp, OSWorld 2.0 and DeepSWE v1.1 from OpenAI's Astra evaluation tables. Only reported models are displayed; no feature scores are mixed into those results. Astra values: 61.2, 91.5%, 72.6%, 74.1% respectively.
+- Methodology page explains G2 vs evaluation-based ranking, exact weights, missing-evidence handling and limitations. Every chart row has expandable score/source details.
+- Content checks validate all-tool coverage, weight totals, score sums, evidence for awarded points, rank ties, ordering and published Astra values. Prerender checks validate controls, source details and removal of Not ranked from the default HTML.
+- Angular production build passed (68 prerendered routes, about 540 kB initial bundle). No backend logic changed. Interactive browser verification remains unavailable; build/data/prerender checks were used.
+
 ## Update: 2026-09-07 — Astra and complete benchmark coverage
 
 - Angular production build: passed; 68 routes prerendered, 512 kB initial bundle.

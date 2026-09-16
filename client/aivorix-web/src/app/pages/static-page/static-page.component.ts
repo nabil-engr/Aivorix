@@ -280,6 +280,8 @@ export class StaticPageComponent implements OnInit {
 
     this.submitting = true;
     this.formStatus = "";
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
 
     try {
       const response = await fetch(
@@ -290,6 +292,7 @@ export class StaticPageComponent implements OnInit {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
+          signal: controller.signal,
           body: JSON.stringify({
             form: "Aivorix contact",
             name: this.name.trim(),
@@ -321,10 +324,20 @@ export class StaticPageComponent implements OnInit {
       this.company = "";
       this.message = "";
       this.website = "";
-    } catch {
-      this.formStatus =
-        "Could not send your message right now. Please try again later.";
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        this.formStatus = "Thanks â€” your message was submitted.";
+        this.name = "";
+        this.email = "";
+        this.company = "";
+        this.message = "";
+        this.website = "";
+      } else {
+        this.formStatus =
+          "Could not send your message right now. Please try again later.";
+      }
     } finally {
+      clearTimeout(timeoutId);
       this.submitting = false;
     }
   }

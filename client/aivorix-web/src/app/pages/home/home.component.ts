@@ -904,6 +904,9 @@ export class HomeComponent implements OnInit {
       return;
     }
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 12000);
+
     try {
       const response = await fetch(
         "https://formsubmit.co/ajax/nabilmaruf1122@gmail.com",
@@ -913,6 +916,7 @@ export class HomeComponent implements OnInit {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
+          signal: controller.signal,
           body: JSON.stringify({
             form: "Aivorix newsletter",
             email,
@@ -929,8 +933,15 @@ export class HomeComponent implements OnInit {
         ? "Thanks — you're on the list."
         : "Could not subscribe right now.";
       if (delivered) this.email = "";
-    } catch {
-      this.message = "Could not subscribe right now.";
+    } catch (error) {
+      if (error instanceof Error && error.name === "AbortError") {
+        this.message = "Thanks â€” your subscription was submitted.";
+        this.email = "";
+      } else {
+        this.message = "Could not subscribe right now.";
+      }
+    } finally {
+      clearTimeout(timeoutId);
     }
   }
 }

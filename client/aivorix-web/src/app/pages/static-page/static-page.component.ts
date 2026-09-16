@@ -303,7 +303,11 @@ export class StaticPageComponent implements OnInit {
         },
       );
 
-      if (!response.ok) {
+      const result = (await response.json()) as { success?: boolean | string };
+      const delivered =
+        response.ok && (result.success === true || result.success === "true");
+
+      if (!delivered) {
         this.formStatus =
           response.status === 429
             ? "Too many attempts. Please wait a minute and try again."

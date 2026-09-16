@@ -922,10 +922,13 @@ export class HomeComponent implements OnInit {
           }),
         },
       );
-      this.message = response.ok
+      const result = (await response.json()) as { success?: boolean | string };
+      const delivered =
+        response.ok && (result.success === true || result.success === "true");
+      this.message = delivered
         ? "Thanks — you're on the list."
         : "Could not subscribe right now.";
-      if (response.ok) this.email = "";
+      if (delivered) this.email = "";
     } catch {
       this.message = "Could not subscribe right now.";
     }

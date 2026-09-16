@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterLink } from "@angular/router";
 import { COMPARISONS } from "../../data/comparisons.data";
@@ -851,7 +851,10 @@ export class HomeComponent implements OnInit {
   email = "";
   message = "";
 
-  constructor(private readonly seo: SeoService) {}
+  constructor(
+    private readonly seo: SeoService,
+    private readonly cdr: ChangeDetectorRef,
+  ) {}
 
   get currentBenchmark(): BenchmarkView {
     return (
@@ -941,6 +944,8 @@ export class HomeComponent implements OnInit {
       if (outcome.delivered) this.email = "";
     } catch {
       this.message = "Could not subscribe right now.";
+    } finally {
+      this.cdr.detectChanges();
     }
   }
 }

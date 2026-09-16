@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, RouterLink } from "@angular/router";
 import { SeoService } from "../../services/seo.service";
@@ -254,6 +254,7 @@ export class StaticPageComponent implements OnInit {
   constructor(
     private readonly route: ActivatedRoute,
     private readonly seo: SeoService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -335,6 +336,7 @@ export class StaticPageComponent implements OnInit {
         "Could not send your message right now. Please try again later.";
     } finally {
       this.submitting = false;
+      this.cdr.detectChanges();
     }
   }
 }

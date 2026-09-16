@@ -1,5 +1,9 @@
 # Aivorix project memory
 
+## Netlify form email setup: 2026-09-16
+
+Added static Netlify detector definitions for the `newsletter` and `contact` forms in `src/index.html` and `public/forms.html`. Configured a site-level `submission_created` email hook to `nabilmaruf1122@gmail.com` (hook `6aaa5e0525f9f168781439ea`), covering both forms. Netlify's API currently reports no registered live forms. A prepared production deploy was rejected with `Account credit usage exceeded - new deploys are blocked until credits are added`; after billing/credits are restored, deploy the current source and verify both forms appear in Netlify Forms before sending test submissions. Local production build was also blocked by host memory allocation failures, so the existing prior build output was packaged for the attempted deploy rather than treated as a fresh successful build.
+
 ## News rewrite: 2026-09-08
 
 User rejected the article voice as artificial, especially the sentence “This September 7 documentation briefing is not a claim that the model launched on this date.” Rewrote all 16 existing news stories in shorter, plain-English paragraphs with concrete implications and three direct takeaways. Removed internal fact-checking/editorial-process language from reader-facing copy. News detail now labels the takeaway section “What this means” and explains the source panel more naturally; the news index promises jargon-free explanations.

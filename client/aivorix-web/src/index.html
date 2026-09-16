@@ -14,6 +14,25 @@
     <link rel="preconnect" href="https://www.anthropic.com">
 </head>
 
-<body><app-root></app-root></body>
+<body>
+    <!-- Netlify scans this static HTML at deploy time. The visible Angular forms
+         submit the same field names and show their own inline status messages. -->
+    <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="website" hidden>
+        <input type="hidden" name="form-name" value="newsletter">
+        <input type="hidden" name="subject" value="New Aivorix newsletter subscriber">
+        <input name="website">
+        <input type="email" name="email">
+    </form>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="website" hidden>
+        <input type="hidden" name="form-name" value="contact">
+        <input type="hidden" name="subject" value="New Aivorix contact message">
+        <input name="website">
+        <input name="name">
+        <input type="email" name="email">
+        <input name="company">
+        <textarea name="message"></textarea>
+    </form>
+    <app-root></app-root>
+</body>
 
 </html>

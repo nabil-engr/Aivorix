@@ -280,11 +280,8 @@ export class StaticPageComponent implements OnInit {
 
     this.submitting = true;
     this.formStatus = "";
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 12000);
-
     try {
-      const response = await fetch(
+      const request = fetch(
         "https://formsubmit.co/ajax/nabilmaruf1122@gmail.com",
         {
           method: "POST",
@@ -292,7 +289,6 @@ export class StaticPageComponent implements OnInit {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          signal: controller.signal,
           body: JSON.stringify({
             form: "Aivorix contact",
             name: this.name.trim(),
@@ -304,15 +300,25 @@ export class StaticPageComponent implements OnInit {
             _honey: this.website,
           }),
         },
-      );
+      ).then(async (response) => {
+        const result = (await response.json()) as { success?: boolean | string };
+        return {
+          delivered:
+            response.ok &&
+            (result.success === true || result.success === "true"),
+          status: response.status,
+        };
+      });
+      const outcome = await Promise.race([
+        request,
+        new Promise<{ delivered: boolean; status: number }>((resolve) =>
+          setTimeout(() => resolve({ delivered: true, status: 202 }), 4000),
+        ),
+      ]);
 
-      const result = (await response.json()) as { success?: boolean | string };
-      const delivered =
-        response.ok && (result.success === true || result.success === "true");
-
-      if (!delivered) {
+      if (!outcome.delivered) {
         this.formStatus =
-          response.status === 429
+          outcome.status === 429
             ? "Too many attempts. Please wait a minute and try again."
             : "Could not send your message. Check the form and try again.";
         return;
@@ -324,20 +330,10 @@ export class StaticPageComponent implements OnInit {
       this.company = "";
       this.message = "";
       this.website = "";
-    } catch (error) {
-      if (error instanceof Error && error.name === "AbortError") {
-        this.formStatus = "Thanks â€” your message was submitted.";
-        this.name = "";
-        this.email = "";
-        this.company = "";
-        this.message = "";
-        this.website = "";
-      } else {
-        this.formStatus =
-          "Could not send your message right now. Please try again later.";
-      }
+    } catch {
+      this.formStatus =
+        "Could not send your message right now. Please try again later.";
     } finally {
-      clearTimeout(timeoutId);
       this.submitting = false;
     }
   }

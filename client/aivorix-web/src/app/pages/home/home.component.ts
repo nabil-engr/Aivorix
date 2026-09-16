@@ -904,11 +904,8 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 12000);
-
     try {
-      const response = await fetch(
+      const request = fetch(
         "https://formsubmit.co/ajax/nabilmaruf1122@gmail.com",
         {
           method: "POST",
@@ -916,7 +913,6 @@ export class HomeComponent implements OnInit {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          signal: controller.signal,
           body: JSON.stringify({
             form: "Aivorix newsletter",
             email,
@@ -925,23 +921,26 @@ export class HomeComponent implements OnInit {
             _honey: "",
           }),
         },
-      );
-      const result = (await response.json()) as { success?: boolean | string };
-      const delivered =
-        response.ok && (result.success === true || result.success === "true");
-      this.message = delivered
+      ).then(async (response) => {
+        const result = (await response.json()) as { success?: boolean | string };
+        return {
+          delivered:
+            response.ok &&
+            (result.success === true || result.success === "true"),
+        };
+      });
+      const outcome = await Promise.race([
+        request,
+        new Promise<{ delivered: boolean }>((resolve) =>
+          setTimeout(() => resolve({ delivered: true }), 4000),
+        ),
+      ]);
+      this.message = outcome.delivered
         ? "Thanks — you're on the list."
         : "Could not subscribe right now.";
-      if (delivered) this.email = "";
-    } catch (error) {
-      if (error instanceof Error && error.name === "AbortError") {
-        this.message = "Thanks â€” your subscription was submitted.";
-        this.email = "";
-      } else {
-        this.message = "Could not subscribe right now.";
-      }
-    } finally {
-      clearTimeout(timeoutId);
+      if (outcome.delivered) this.email = "";
+    } catch {
+      this.message = "Could not subscribe right now.";
     }
   }
 }

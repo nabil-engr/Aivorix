@@ -898,17 +898,30 @@ export class HomeComponent implements OnInit {
   }
 
   async subscribe(): Promise<void> {
+    const email = this.email.trim();
+    if (!email) {
+      this.message = "Enter a valid email address.";
+      return;
+    }
+
     try {
-      const body = new URLSearchParams({
-        "form-name": "newsletter",
-        email: this.email,
-        website: "",
-      });
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: body.toString(),
-      });
+      const response = await fetch(
+        "https://formsubmit.co/ajax/nabilmaruf1122@gmail.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            form: "Aivorix newsletter",
+            email,
+            _subject: "New Aivorix newsletter subscriber",
+            _template: "table",
+            _honey: "",
+          }),
+        },
+      );
       this.message = response.ok
         ? "Thanks — you're on the list."
         : "Could not subscribe right now.";

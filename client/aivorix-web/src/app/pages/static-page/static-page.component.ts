@@ -282,19 +282,26 @@ export class StaticPageComponent implements OnInit {
     this.formStatus = "";
 
     try {
-      const body = new URLSearchParams({
-        "form-name": "contact",
-        name: this.name,
-        email: this.email,
-        company: this.company,
-        message: this.message,
-        website: this.website,
-      });
-      const response = await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: body.toString(),
-      });
+      const response = await fetch(
+        "https://formsubmit.co/ajax/nabilmaruf1122@gmail.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            form: "Aivorix contact",
+            name: this.name.trim(),
+            email: this.email.trim(),
+            company: this.company.trim(),
+            message: this.message.trim(),
+            _subject: "New Aivorix contact message",
+            _template: "table",
+            _honey: this.website,
+          }),
+        },
+      );
 
       if (!response.ok) {
         this.formStatus =

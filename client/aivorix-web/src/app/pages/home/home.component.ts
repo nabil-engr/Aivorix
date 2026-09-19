@@ -31,10 +31,10 @@ import { SeoService } from "../../services/seo.service";
               deep research, tool use and repository-scale coding.
             </p>
             <div class="actions">
-              <a routerLink="/compare" class="btn primary"
+              <a routerLink="/compare/" class="btn primary"
                 >Build your comparison</a
               >
-              <a routerLink="/tools" class="btn">Explore all dossiers</a>
+              <a routerLink="/tools/" class="btn">Explore all dossiers</a>
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@ import { SeoService } from "../../services/seo.service";
                   <div class="bar-row">
                     <a
                       class="bar-label"
-                      [routerLink]="['/tools', entry.toolSlug]"
+                      [routerLink]="['/tools', entry.toolSlug, '']"
                     >
                       <span class="rank">{{ entry.rank ?? rank + 1 }}</span>
                       <span
@@ -212,7 +212,7 @@ import { SeoService } from "../../services/seo.service";
           @for (signal of productSignals; track signal.toolSlug) {
             <article class="signal-card">
               <div class="signal-top">
-                <a [routerLink]="['/tools', signal.toolSlug]">{{
+                <a [routerLink]="['/tools', signal.toolSlug, '']">{{
                   signal.tool
                 }}</a>
                 <span>0{{ $index + 1 }}</span>
@@ -245,7 +245,7 @@ import { SeoService } from "../../services/seo.service";
             <span class="eyebrow">Latest</span>
             <h2>AI news without the noise</h2>
           </div>
-          <a routerLink="/news">All news →</a>
+          <a routerLink="/news/">All news →</a>
         </div>
         <div class="news-grid">
           @for (article of news.slice(0, 6); track article.slug) {
@@ -253,7 +253,7 @@ import { SeoService } from "../../services/seo.service";
               <span class="chip">{{ article.category }}</span>
               <p class="date">{{ article.date }}</p>
               <h3>
-                <a [routerLink]="['/news', article.slug]">{{
+                <a [routerLink]="['/news', article.slug, '']">{{
                   article.title
                 }}</a>
               </h3>
@@ -272,13 +272,13 @@ import { SeoService } from "../../services/seo.service";
             <span class="eyebrow">Buyer guides</span>
             <h2>Popular AI comparisons</h2>
           </div>
-          <a routerLink="/compare" class="btn small">Build a comparison</a>
+          <a routerLink="/compare/" class="btn small">Build a comparison</a>
         </div>
         <div class="comparison-grid">
           @for (comparison of comps.slice(0, 6); track comparison.slug) {
             <a
               class="card comparison-card"
-              [routerLink]="['/comparisons', comparison.slug]"
+              [routerLink]="['/comparisons', comparison.slug, '']"
             >
               <div class="vs">VS</div>
               <h3>{{ comparison.title }}</h3>
@@ -297,11 +297,11 @@ import { SeoService } from "../../services/seo.service";
             <span class="eyebrow">Directory</span>
             <h2>AI tools at a glance</h2>
           </div>
-          <a routerLink="/tools">View directory →</a>
+          <a routerLink="/tools/">View directory →</a>
         </div>
         <div class="tool-strip">
           @for (tool of tools; track tool.slug) {
-            <a [routerLink]="['/tools', tool.slug]" class="tool-pill"
+            <a [routerLink]="['/tools', tool.slug, '']" class="tool-pill"
               ><strong>{{ tool.name }}</strong
               ><small>{{ tool.category }}</small></a
             >

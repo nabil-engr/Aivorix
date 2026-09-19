@@ -1,5 +1,9 @@
 # Aivorix project memory
 
+## Trailing-slash SEO alignment: 2026-09-19
+
+Search Console reported `Failed: Redirect error` for `/comparisons`, `/compare`, and a comparison detail URL. Live checks with normal and Googlebot user agents found no loop or long chain: each slashless route received one Netlify Pretty URLs `301` to its trailing-slash form, then `200`. The final HTML nevertheless declared the slashless URL as canonical, and both sitemaps and internal links also advertised slashless routes. Updated `SeoService` to emit trailing-slash canonical/Open Graph URLs and normalize Aivorix URLs inside JSON-LD, updated internal router links, and updated the sitemap generator plus both generated sitemaps to use the final trailing-slash page URLs. Static assets and XML URLs remain unchanged. Content checks pass for 656 routes. Local Angular production build remains blocked by the Windows host's memory allocation failure; use CI/deploy build results as current build evidence.
+
 ## Netlify form email setup: 2026-09-16
 
 Added static Netlify detector definitions for the `newsletter` and `contact` forms in `src/index.html` and `public/forms.html`. Configured a site-level `submission_created` email hook to `nabilmaruf1122@gmail.com` (hook `6aaa5e0525f9f168781439ea`), covering both forms. Netlify's API currently reports no registered live forms. A prepared production deploy was rejected with `Account credit usage exceeded - new deploys are blocked until credits are added`; after billing/credits are restored, deploy the current source and verify both forms appear in Netlify Forms before sending test submissions. Local production build was also blocked by host memory allocation failures, so the existing prior build output was packaged for the attempted deploy rather than treated as a fresh successful build.

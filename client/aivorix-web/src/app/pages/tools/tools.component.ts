@@ -24,7 +24,7 @@ import { SeoService } from "../../services/seo.service";
     <section class="section">
       <div class="container tool-directory">
         @for (t of filtered(); track t.slug) {
-          <a class="card tool-card" [routerLink]="['/tools', t.slug]"
+          <a class="card tool-card" [routerLink]="['/tools', t.slug, '']"
             ><div>
               <span class="chip">{{ t.category }}</span
               ><span class="date">Verified {{ t.verified }}</span>

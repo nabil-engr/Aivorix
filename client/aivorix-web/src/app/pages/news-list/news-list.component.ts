@@ -31,7 +31,7 @@ import { SeoService } from "../../services/seo.service";
               ><span class="date">{{ a.date }}</span>
             </div>
             <h2>
-              <a [routerLink]="['/news', a.slug]">{{ a.title }}</a>
+              <a [routerLink]="['/news', a.slug, '']">{{ a.title }}</a>
             </h2>
             <p>{{ a.summary }}</p>
             <div class="source">

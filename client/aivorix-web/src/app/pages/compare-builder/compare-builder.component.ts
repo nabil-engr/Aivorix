@@ -31,7 +31,7 @@ import { SeoService } from "../../services/seo.service";
             <div class="model-art" [attr.data-provider]="profile.provider"><span>{{ initials(profile.name) }}</span></div>
             <span class="profile-kind">{{ profile.provider }} · {{ profile.kind }}</span><h2>{{ profile.name }}</h2>
             <p>{{ profile.description }}</p><strong>Best for: {{ profile.bestFor }}</strong>
-            @if (profile.toolSlug) { <a class="btn" [routerLink]="['/tools', profile.toolSlug]">Full profile</a> }
+            @if (profile.toolSlug) { <a class="btn" [routerLink]="['/tools', profile.toolSlug, '']">Full profile</a> }
             <a class="btn primary" [href]="profile.source" target="_blank" rel="nofollow noopener">Official source</a>
           </article>
         }
@@ -49,7 +49,7 @@ import { SeoService } from "../../services/seo.service";
       }
       <section class="pair-links card"><span class="eyebrow">Detailed pair guides</span><h2>Open a dedicated comparison</h2>
         <div class="pair-grid">@for (pair of selectedPairs; track pair.slug) {
-          <a [routerLink]="['/comparisons', pair.slug]">{{ pair.title }} <span>→</span></a>
+          <a [routerLink]="['/comparisons', pair.slug, '']">{{ pair.title }} <span>→</span></a>
         }</div>
       </section>
     </div></section>

@@ -35,20 +35,20 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
           [class.open]="menuOpen"
           aria-label="Main navigation"
         >
-          <a routerLink="/news" routerLinkActive="active" (click)="closeMenu()"
+          <a routerLink="/news/" routerLinkActive="active" (click)="closeMenu()"
             >AI News</a
           >
           <a
-            routerLink="/comparisons"
+            routerLink="/comparisons/"
             routerLinkActive="active"
             (click)="closeMenu()"
             >Comparisons</a
           >
-          <a routerLink="/tools" routerLinkActive="active" (click)="closeMenu()"
+          <a routerLink="/tools/" routerLinkActive="active" (click)="closeMenu()"
             >AI Tools</a
           >
           <a
-            routerLink="/compare"
+            routerLink="/compare/"
             routerLinkActive="active"
             class="nav-cta"
             (click)="closeMenu()"

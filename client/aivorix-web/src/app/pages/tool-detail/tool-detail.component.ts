@@ -122,7 +122,7 @@ function buildFallbackDossier(tool: AiTool): ToolDossier {
     @if (tool && dossier) {
       <section class="detail-hero">
         <div class="container detail-width">
-          <a routerLink="/tools" class="back">&larr; AI Tools directory</a>
+          <a routerLink="/tools/" class="back">&larr; AI Tools directory</a>
           <div class="hero-layout">
             <div>
               <div class="hero-kicker">
@@ -417,7 +417,7 @@ function buildFallbackDossier(tool: AiTool): ToolDossier {
                 <h2>Compare {{ tool.name }}</h2>
                 <div class="related-grid">
                   @for (comparison of related; track comparison.slug) {
-                    <a [routerLink]="['/comparisons', comparison.slug]"
+                    <a [routerLink]="['/comparisons', comparison.slug, '']"
                       ><h3>{{ comparison.title }}</h3>
                       <p>{{ comparison.verdict }}</p>
                       <span>Open comparison &rarr;</span></a
@@ -435,7 +435,7 @@ function buildFallbackDossier(tool: AiTool): ToolDossier {
           <span class="eyebrow">AI Tools directory</span>
           <h1>Tool not found</h1>
           <p class="lead">This research dossier is not available.</p>
-          <a class="btn" routerLink="/tools">Back to AI tools</a>
+          <a class="btn" routerLink="/tools/">Back to AI tools</a>
         </div>
       </section>
     }

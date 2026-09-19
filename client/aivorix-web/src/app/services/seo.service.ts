@@ -26,7 +26,7 @@ export class SeoService {
     const fullTitle = options.title.includes('Aivorix')
       ? options.title
       : `${options.title} | Aivorix`;
-    const url = this.base + options.path;
+    const url = this.pageUrl(options.path);
     const image = options.image || this.base + '/og-default.png';
 
     this.title.setTitle(fullTitle);
@@ -55,7 +55,9 @@ export class SeoService {
       const script = this.document.createElement('script');
       script.type = 'application/ld+json';
       script.setAttribute('data-aivorix-jsonld', '1');
-      script.textContent = JSON.stringify(options.jsonLd);
+      script.textContent = JSON.stringify(options.jsonLd, (_key, value) =>
+        typeof value === 'string' ? this.normalizeSiteUrl(value) : value
+      );
       this.document.head.appendChild(script);
     }
   }
@@ -84,5 +86,21 @@ export class SeoService {
     this.document
       .querySelectorAll('script[data-aivorix-jsonld]')
       .forEach(element => element.remove());
+  }
+
+  private pageUrl(path: string): string {
+    const normalizedPath = path === '/' ? '/' : `/${path.replace(/^\/+|\/+$/g, '')}/`;
+    return this.base + normalizedPath;
+  }
+
+  private normalizeSiteUrl(value: string): string {
+    if (!value.startsWith(this.base)) return value;
+
+    const url = new URL(value);
+    const lastSegment = url.pathname.split('/').filter(Boolean).at(-1) ?? '';
+    if (!url.pathname.endsWith('/') && !lastSegment.includes('.')) {
+      url.pathname += '/';
+    }
+    return url.toString();
   }
 }

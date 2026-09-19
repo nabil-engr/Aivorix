@@ -31,10 +31,10 @@ import { SeoService } from "../../services/seo.service";
               deep research, tool use and repository-scale coding.
             </p>
             <div class="actions">
-              <a routerLink="/compare/" class="btn primary"
+              <a [routerLink]="['/compare', '']" class="btn primary"
                 >Build your comparison</a
               >
-              <a routerLink="/tools/" class="btn">Explore all dossiers</a>
+              <a [routerLink]="['/tools', '']" class="btn">Explore all dossiers</a>
             </div>
           </div>
         </div>
@@ -245,7 +245,7 @@ import { SeoService } from "../../services/seo.service";
             <span class="eyebrow">Latest</span>
             <h2>AI news without the noise</h2>
           </div>
-          <a routerLink="/news/">All news →</a>
+          <a [routerLink]="['/news', '']">All news →</a>
         </div>
         <div class="news-grid">
           @for (article of news.slice(0, 6); track article.slug) {
@@ -272,7 +272,7 @@ import { SeoService } from "../../services/seo.service";
             <span class="eyebrow">Buyer guides</span>
             <h2>Popular AI comparisons</h2>
           </div>
-          <a routerLink="/compare/" class="btn small">Build a comparison</a>
+          <a [routerLink]="['/compare', '']" class="btn small">Build a comparison</a>
         </div>
         <div class="comparison-grid">
           @for (comparison of comps.slice(0, 6); track comparison.slug) {
@@ -297,7 +297,7 @@ import { SeoService } from "../../services/seo.service";
             <span class="eyebrow">Directory</span>
             <h2>AI tools at a glance</h2>
           </div>
-          <a routerLink="/tools/">View directory →</a>
+          <a [routerLink]="['/tools', '']">View directory →</a>
         </div>
         <div class="tool-strip">
           @for (tool of tools; track tool.slug) {

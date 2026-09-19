@@ -11,7 +11,7 @@ import { SeoService } from "../../services/seo.service";
         <header class="article-hero">
           <div class="container article-width">
             <div class="comparison-meta">
-              <a routerLink="/comparisons/" class="back"
+              <a [routerLink]="['/comparisons', '']" class="back"
                 ><span aria-hidden="true">←</span> Comparisons</a
               >
               <span class="meta-divider" aria-hidden="true"></span>

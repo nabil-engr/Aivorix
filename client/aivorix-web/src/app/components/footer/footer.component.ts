@@ -17,22 +17,22 @@ import { RouterLink } from "@angular/router";
       </div>
       <div>
         <h4>Explore</h4>
-        <a routerLink="/news/">AI News</a
-        ><a routerLink="/comparisons/">Comparisons</a
-        ><a routerLink="/tools/">AI Tools</a
-        ><a routerLink="/methodology/">Methodology</a>
+        <a [routerLink]="['/news', '']">AI News</a
+        ><a [routerLink]="['/comparisons', '']">Comparisons</a
+        ><a [routerLink]="['/tools', '']">AI Tools</a
+        ><a [routerLink]="['/methodology', '']">Methodology</a>
       </div>
       <div>
         <h4>Company</h4>
-        <a routerLink="/about/">About</a
-        ><a routerLink="/editorial-policy/">Editorial policy</a
-        ><a routerLink="/advertise/">Advertise</a
-        ><a routerLink="/contact/">Contact</a>
+        <a [routerLink]="['/about', '']">About</a
+        ><a [routerLink]="['/editorial-policy', '']">Editorial policy</a
+        ><a [routerLink]="['/advertise', '']">Advertise</a
+        ><a [routerLink]="['/contact', '']">Contact</a>
       </div>
       <div>
         <h4>Legal</h4>
-        <a routerLink="/privacy/">Privacy</a><a routerLink="/terms/">Terms</a
-        ><a routerLink="/affiliate-disclosure/">Affiliate disclosure</a>
+        <a [routerLink]="['/privacy', '']">Privacy</a><a [routerLink]="['/terms', '']">Terms</a
+        ><a [routerLink]="['/affiliate-disclosure', '']">Affiliate disclosure</a>
       </div>
     </div>
     <div class="container footer-bottom">

@@ -14,7 +14,7 @@ import { SeoService } from "../../services/seo.service";
           See the practical differences in features, pricing and day-to-day use.
           Browse {{ items.length }} consistent pair guides covering products and models. Every page includes a review date, practical fit and official sources.
         </p>
-        <a routerLink="/compare/" class="btn primary"
+        <a [routerLink]="['/compare', '']" class="btn primary"
           >Compare any two AI tools</a
         >
       </div>

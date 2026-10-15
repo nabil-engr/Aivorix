@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { Subscription } from "rxjs";
 import { COMPARISONS } from "../../data/comparisons.data";
 import { COMPARISON_PROFILE_MAP } from "../../data/comparison-profiles.data";
@@ -12,7 +12,7 @@ import { SeoService } from "../../services/seo.service";
         <header class="article-hero">
           <div class="container article-width">
             <div class="comparison-meta">
-              <a [routerLink]="['/comparisons', '']" class="back"
+              <a routerLink="/comparisons" class="back"
                 ><span aria-hidden="true">←</span> Comparisons</a
               >
               <span class="meta-divider" aria-hidden="true"></span>
@@ -191,6 +191,7 @@ export class CompareDetailComponent implements OnInit, OnDestroy {
   }
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly seo: SeoService,
     private readonly cdr: ChangeDetectorRef,
   ) {}
@@ -198,7 +199,11 @@ export class CompareDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.route.paramMap.subscribe((params) => {
       const rawSlug = params.get("slug") ?? "";
-      const slug = rawSlug.replace(/\/+$/, "");
+      const slug = rawSlug.replace(/\/+$/, "").trim();
+      if (!slug) {
+        this.router.navigate(["/comparisons"], { replaceUrl: true });
+        return;
+      }
       this.loadComparison(slug);
       this.cdr.markForCheck();
     });

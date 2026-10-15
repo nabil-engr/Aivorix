@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { Subscription } from "rxjs";
 import { COMPARISONS } from "../../data/comparisons.data";
 import { AI_TOOL_DETAILS, ToolDossier } from "../../data/tool-details.data";
@@ -123,7 +123,7 @@ function buildFallbackDossier(tool: AiTool): ToolDossier {
     @if (tool && dossier) {
       <section class="detail-hero">
         <div class="container detail-width">
-          <a [routerLink]="['/tools', '']" class="back">&larr; AI Tools directory</a>
+          <a routerLink="/tools" class="back">&larr; AI Tools directory</a>
           <div class="hero-layout">
             <div>
               <div class="hero-kicker">
@@ -418,7 +418,7 @@ function buildFallbackDossier(tool: AiTool): ToolDossier {
                 <h2>Compare {{ tool.name }}</h2>
                 <div class="related-grid">
                   @for (comparison of related; track comparison.slug) {
-                    <a [routerLink]="['/comparisons', comparison.slug, '']"
+                    <a [routerLink]="['/comparisons', comparison.slug]"
                       ><h3>{{ comparison.title }}</h3>
                       <p>{{ comparison.verdict }}</p>
                       <span>Open comparison &rarr;</span></a
@@ -436,7 +436,7 @@ function buildFallbackDossier(tool: AiTool): ToolDossier {
           <span class="eyebrow">AI Tools directory</span>
           <h1>Tool not found</h1>
           <p class="lead">This research dossier is not available.</p>
-          <a class="btn" [routerLink]="['/tools', '']">Back to AI tools</a>
+          <a class="btn" routerLink="/tools">Back to AI tools</a>
         </div>
       </section>
     }
@@ -1150,6 +1150,7 @@ export class ToolDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly seo: SeoService,
     private readonly cdr: ChangeDetectorRef,
   ) {}
@@ -1157,7 +1158,11 @@ export class ToolDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.route.paramMap.subscribe((params) => {
       const rawSlug = params.get("slug") ?? "";
-      const slug = rawSlug.replace(/\/+$/, "");
+      const slug = rawSlug.replace(/\/+$/, "").trim();
+      if (!slug) {
+        this.router.navigate(["/tools"], { replaceUrl: true });
+        return;
+      }
       this.loadTool(slug);
       this.cdr.markForCheck();
     });

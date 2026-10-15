@@ -1,4 +1,12 @@
-# Aivorix project memory
+## Router link trailing-segment bug fix: 2026-10-15
+
+Identified and resolved root cause of "Article not found", "Comparison not found", and "Tool not found" on main navigation pages:
+- **Root Cause:** Navigation templates were declaring routerLinks with an empty string segment to emulate trailing slashes (e.g. `[routerLink]="['/news', '']"`, `[routerLink]="['/comparisons', '']"`). In Angular router, `['/news', '']` creates a 2-segment path where segment 1 is `""`. Angular matched the parameterized detail routes (`news/:slug`, `comparisons/:slug`, `tools/:slug`) with `:slug = ""`. Because no item had slug `""`, the detail components loaded and rendered "Not Found". When users reloaded (F5), Netlify served `news/index.html` (the list page), making it seem like a reload was required.
+- **Fix Applied:**
+  1. Updated [`header.component.ts`](client/aivorix-web/src/app/components/header/header.component.ts) and [`footer.component.ts`](client/aivorix-web/src/app/components/footer/footer.component.ts) to clean string paths (`routerLink="/news"`, `routerLink="/comparisons"`, `routerLink="/tools"`, `routerLink="/compare"`, etc.).
+  2. Cleaned all internal back-links and card links across [`news-detail.component.ts`](client/aivorix-web/src/app/pages/news-detail/news-detail.component.ts), [`compare-detail.component.ts`](client/aivorix-web/src/app/pages/compare-detail/compare-detail.component.ts), [`compare-list.component.ts`](client/aivorix-web/src/app/pages/compare-list/compare-list.component.ts), [`compare-builder.component.ts`](client/aivorix-web/src/app/pages/compare-builder/compare-builder.component.ts), [`tool-detail.component.ts`](client/aivorix-web/src/app/pages/tool-detail/tool-detail.component.ts), [`tools.component.ts`](client/aivorix-web/src/app/pages/tools/tools.component.ts), and [`news-list.component.ts`](client/aivorix-web/src/app/pages/news-list/news-list.component.ts).
+  3. Added defensive guard in `NewsDetailComponent`, `CompareDetailComponent`, and `ToolDetailComponent`: if `!slug || slug === ""` (or empty), the component proactively redirects to its respective list route (`/news`, `/comparisons`, `/tools`) via `router.navigate([path], { replaceUrl: true })`.
+  4. Preserved `ChangeDetectorRef` and `paramMap.subscribe()` reactive lifecycle across all components.
 
 ## October 2026 model update: 2026-10-15
 

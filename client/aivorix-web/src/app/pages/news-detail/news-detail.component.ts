@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute, RouterLink } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { Subscription } from "rxjs";
 import { NEWS } from "../../data/news.data";
 import { SeoService } from "../../services/seo.service";
@@ -13,7 +13,7 @@ type NewsArticle = (typeof NEWS)[number];
       <article>
         <header class="article-hero">
           <div class="container article-shell">
-            <a [routerLink]="['/news', '']" class="back">← AI News</a>
+            <a routerLink="/news" class="back">← AI News</a>
             <div>
               <span class="chip">{{ article.category }}</span
               ><span class="date">{{ article.date }}</span>
@@ -65,12 +65,12 @@ type NewsArticle = (typeof NEWS)[number];
               <h2>Recent news</h2>
             </div>
             @for (item of recent; track item.slug) {
-              <a class="recent-item" [routerLink]="['/news', item.slug, '']"
+              <a class="recent-item" [routerLink]="['/news', item.slug]"
                 ><span>{{ item.category }} · {{ item.date }}</span
                 ><strong>{{ item.title }}</strong></a
               >
             }
-            <a class="all-news" [routerLink]="['/news', '']">View all AI news →</a>
+            <a class="all-news" routerLink="/news">View all AI news →</a>
           </aside>
         </div>
 
@@ -82,11 +82,11 @@ type NewsArticle = (typeof NEWS)[number];
                   <span class="eyebrow">Keep reading</span>
                   <h2>Related news</h2>
                 </div>
-                <a [routerLink]="['/news', '']">All news →</a>
+                <a routerLink="/news">All news →</a>
               </div>
               <div class="related-grid">
                 @for (item of related; track item.slug) {
-                  <a class="related-card" [routerLink]="['/news', item.slug, '']"
+                  <a class="related-card" [routerLink]="['/news', item.slug]"
                     ><div>
                       <span class="chip">{{ item.category }}</span
                       ><span class="date">{{ item.date }}</span>
@@ -105,7 +105,7 @@ type NewsArticle = (typeof NEWS)[number];
       <section class="page-hero">
         <div class="container">
           <h1>Article not found</h1>
-          <a [routerLink]="['/news', '']">Back to AI News</a>
+          <a routerLink="/news">Back to AI News</a>
         </div>
       </section>
     }`,
@@ -262,6 +262,7 @@ export class NewsDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly router: Router,
     private readonly seo: SeoService,
     private readonly cdr: ChangeDetectorRef,
   ) {}
@@ -269,7 +270,11 @@ export class NewsDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sub = this.route.paramMap.subscribe((params) => {
       const rawSlug = params.get("slug") ?? "";
-      const slug = rawSlug.replace(/\/+$/, "");
+      const slug = rawSlug.replace(/\/+$/, "").trim();
+      if (!slug) {
+        this.router.navigate(["/news"], { replaceUrl: true });
+        return;
+      }
       this.loadArticle(slug);
       this.cdr.markForCheck();
     });

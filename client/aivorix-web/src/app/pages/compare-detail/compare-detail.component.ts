@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
+import { Subscription } from "rxjs";
 import { COMPARISONS } from "../../data/comparisons.data";
 import { COMPARISON_PROFILE_MAP } from "../../data/comparison-profiles.data";
 import { SeoService } from "../../services/seo.service";
@@ -134,10 +135,12 @@ import { SeoService } from "../../services/seo.service";
       </section>
     }`,
 })
-export class CompareDetailComponent implements OnInit {
+export class CompareDetailComponent implements OnInit, OnDestroy {
   c: any;
   left: any;
   right: any;
+  private sub?: Subscription;
+
   get faqs() {
     if (!this.c || !this.left || !this.right) return [];
     return [
@@ -187,13 +190,29 @@ export class CompareDetailComponent implements OnInit {
     ];
   }
   constructor(
-    private route: ActivatedRoute,
-    private seo: SeoService,
+    private readonly route: ActivatedRoute,
+    private readonly seo: SeoService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
-  ngOnInit() {
-    const slug = this.route.snapshot.paramMap.get("slug");
+
+  ngOnInit(): void {
+    this.sub = this.route.paramMap.subscribe((params) => {
+      const rawSlug = params.get("slug") ?? "";
+      const slug = rawSlug.replace(/\/+$/, "");
+      this.loadComparison(slug);
+      this.cdr.markForCheck();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
+
+  private loadComparison(slug: string): void {
     this.c = COMPARISONS.find((x) => x.slug === slug);
     if (!this.c) {
+      this.left = undefined;
+      this.right = undefined;
       this.seo.noIndex();
       return;
     }

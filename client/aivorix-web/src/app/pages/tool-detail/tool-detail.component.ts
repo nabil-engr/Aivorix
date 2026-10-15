@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
+import { Subscription } from "rxjs";
 import { COMPARISONS } from "../../data/comparisons.data";
 import { AI_TOOL_DETAILS, ToolDossier } from "../../data/tool-details.data";
 import { AI_TOOLS } from "../../data/tools.data";
@@ -1141,20 +1142,36 @@ function buildFallbackDossier(tool: AiTool): ToolDossier {
     }
   `,
 })
-export class ToolDetailComponent implements OnInit {
+export class ToolDetailComponent implements OnInit, OnDestroy {
   tool?: AiTool;
   dossier?: ToolDossier;
   related: Comparison[] = [];
+  private sub?: Subscription;
 
   constructor(
     private readonly route: ActivatedRoute,
     private readonly seo: SeoService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
-    const slug = this.route.snapshot.paramMap.get("slug");
+    this.sub = this.route.paramMap.subscribe((params) => {
+      const rawSlug = params.get("slug") ?? "";
+      const slug = rawSlug.replace(/\/+$/, "");
+      this.loadTool(slug);
+      this.cdr.markForCheck();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
+
+  private loadTool(slug: string): void {
     this.tool = AI_TOOLS.find((item) => item.slug === slug);
     if (!this.tool) {
+      this.dossier = undefined;
+      this.related = [];
       this.seo.noIndex();
       return;
     }

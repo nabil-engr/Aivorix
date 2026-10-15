@@ -1,5 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, RouterLink } from "@angular/router";
+import { Subscription } from "rxjs";
 import { NEWS } from "../../data/news.data";
 import { SeoService } from "../../services/seo.service";
 
@@ -253,19 +254,36 @@ type NewsArticle = (typeof NEWS)[number];
     }
   `,
 })
-export class NewsDetailComponent implements OnInit {
+export class NewsDetailComponent implements OnInit, OnDestroy {
   article?: NewsArticle;
   recent: NewsArticle[] = [];
   related: NewsArticle[] = [];
+  private sub?: Subscription;
+
   constructor(
     private readonly route: ActivatedRoute,
     private readonly seo: SeoService,
+    private readonly cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
-    const slug = this.route.snapshot.paramMap.get("slug");
+    this.sub = this.route.paramMap.subscribe((params) => {
+      const rawSlug = params.get("slug") ?? "";
+      const slug = rawSlug.replace(/\/+$/, "");
+      this.loadArticle(slug);
+      this.cdr.markForCheck();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
+
+  private loadArticle(slug: string): void {
     this.article = NEWS.find((item) => item.slug === slug);
     if (!this.article) {
+      this.recent = [];
+      this.related = [];
       this.seo.noIndex();
       return;
     }

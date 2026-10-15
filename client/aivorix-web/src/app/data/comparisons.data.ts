@@ -60,6 +60,66 @@ const EDITORIAL_COMPARISONS = [
   ]
 },
   {
+    slug: "gemini-4-argon-vs-claude-sonnet-5-5",
+    title: "Gemini 4 Argon vs Claude Sonnet 5.5: Google or Anthropic for complex work?",
+    left: "gemini-4-argon",
+    right: "claude-sonnet-5-5",
+    updated: "2026-10-15",
+    intro:
+      "Gemini 4 Argon and Claude Sonnet 5.5 are both October 2026 releases from competing labs. Argon is Google's new frontier model; Sonnet 5.5 is Anthropic's improved mid-tier model with advanced security features. They serve different parts of the market.",
+    verdict:
+      "Choose Gemini 4 Argon for the most demanding research, science and multi-step reasoning tasks where tunable thinking depth and multimodal input matter. Choose Claude Sonnet 5.5 for production coding, agentic pipelines and workflows that require fast, cost-efficient responses with enterprise-grade safety controls.",
+    bestLeft: "Frontier reasoning, scientific research and multimodal workflows",
+    bestRight: "Fast production coding, agentic work and enterprise security",
+    rows: [
+      ["Provider", "Google", "Anthropic"],
+      ["Release", "October 2026", "September 2026"],
+      ["Positioning", "Frontier reasoning and multimodal flagship", "Fast balanced mid-tier with security focus"],
+      ["API price (input / output)", "$2 / $10 per 1M tokens (intro through Nov 2026)", "$2 / $10 per 1M tokens"],
+      ["Cache read", "Varies", "$0.10 / 1M tokens"],
+      ["Context window", "1M tokens", "1M tokens"],
+      ["Reasoning", "Tunable: low, medium, high", "Adaptive; high default effort"],
+      ["Speed", "Moderate (adjustable)", "Fast — 30% faster than Sonnet 5"],
+      ["Modalities", "Text, image, audio and video", "Text and image"],
+      ["Best fit", "Research, science, complex multi-step reasoning", "Coding, agents, enterprise pipelines"],
+    ],
+    sources: [
+      "https://deepmind.google/models/gemini/gemini-4-argon/",
+      "https://www.anthropic.com/claude/sonnet",
+    ],
+  },
+  {
+    slug: "claude-sonnet-5-5-vs-gpt-6-sol",
+    title: "Claude Sonnet 5.5 vs GPT-6 Sol: Anthropic or OpenAI for production work?",
+    left: "claude-sonnet-5-5",
+    right: "gpt-6-sol",
+    updated: "2026-10-15",
+    intro:
+      "Claude Sonnet 5.5 and GPT-6 Sol are the current mid-to-flagship models from Anthropic and OpenAI respectively. Both target production coding and professional work. The practical differences come down to developer platform, security posture and how each lab prices enterprise access.",
+    verdict:
+      "Claude Sonnet 5.5 is a strong default for teams already using Anthropic APIs, Claude Code or Anthropic's enterprise platform — especially when the built-in cyber safeguards and competitive cache pricing matter. GPT-6 Sol is the natural choice for teams invested in the OpenAI/ChatGPT ecosystem, Intelligent UI features or the broader Responses API toolchain.",
+    bestLeft: "Anthropic/Claude Code workflows with strong security requirements",
+    bestRight: "OpenAI ecosystem, Intelligent UI and Responses API toolchain",
+    rows: [
+      ["Provider", "Anthropic", "OpenAI"],
+      ["Model family", "Claude 5.5 generation", "GPT-6 generation"],
+      ["API pricing", "$2 input / $10 output per 1M tokens", "See OpenAI pricing page"],
+      ["Cache read pricing", "$0.10 / 1M tokens", "See OpenAI pricing page"],
+      ["Context window", "1M tokens", "1.05M tokens"],
+      ["Maximum output", "128K tokens", "128K tokens"],
+      ["Reasoning", "Adaptive; high default effort", "low, medium, high, xhigh, max"],
+      ["Speed", "Fast — 30% faster than Sonnet 5", "Balanced to fast"],
+      ["Security", "Advanced cyber safeguards built in", "Standard OpenAI safety measures"],
+      ["Coding ecosystem", "Claude Code and Anthropic API", "Codex, Intelligent UI and Responses API"],
+      ["Best fit", "Anthropic-centered security-conscious teams", "OpenAI-centered engineering and product teams"],
+    ],
+    sources: [
+      "https://www.anthropic.com/claude/sonnet",
+      "https://openai.com/chatgpt/",
+    ],
+  },
+
+  {
     slug: "chatgpt-vs-claude",
     title: "ChatGPT vs Claude: which AI assistant should you use in 2026?",
     left: "chatgpt",

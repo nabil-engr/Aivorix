@@ -85,7 +85,7 @@ export class CompareBuilderComponent implements OnInit {
   constructor(private readonly seo: SeoService) {}
   ngOnInit(): void { this.seo.set({
     title:"Compare AI Models Side by Side: Prices, Context & Features",
-    description:"Compare up to three AI models and tools, including GPT-6 Astra, GPT-5.6 Sol, Terra, Luna, GPT-5.5 and Claude Fable, Opus, Sonnet and Haiku.", path:"/compare",
+    description:"Compare up to three AI models and tools, including GPT-6 Astra, GPT-6 Sol, Gemini 4 Argon, Claude Sonnet 5.5, Opus 5.5, Haiku 5.5, and more.", path:"/compare",
     jsonLd:{"@context":"https://schema.org","@type":"WebApplication",name:"Aivorix AI Comparison Builder",applicationCategory:"BusinessApplication"},
   }); }
   get selected(): ComparisonProfile[] { return this.selections.map(slug=>this.profiles.find(profile=>profile.slug===slug)).filter((profile):profile is ComparisonProfile=>!!profile); }

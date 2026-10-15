@@ -1,6 +1,23 @@
 # Aivorix project memory
 
+## October 2026 model update: 2026-10-15
+
+Added new model coverage across ChatGPT (OpenAI), Gemini (Google) and Claude (Anthropic) based on October 2026 releases.
+
+**News (news.data.ts):** 4 new stories prepended (total now 23): Gemini 4 Argon launch (Oct 13), Claude Haiku 5.5 launch (Oct 7), GPT-6 family / ChatGPT Intelligent UI (Oct 1), Claude Sonnet 5.5 launch (Sep 28).
+
+**Comparison profiles (comparison-profiles.data.ts):** Added 5 new model profiles to additionalModels: GPT-6 Sol, GPT-6 Luna, Gemini 4 Argon, Claude Opus 5.5, Claude Sonnet 5.5, Claude Haiku 5.5. These new profiles automatically generate all pairwise comparisons through GENERATED_COMPARISONS. sharedOpenAi verified date updated to 2026-10-15.
+
+**Editorial comparisons (comparisons.data.ts):** Added 2 new hand-written editorial comparisons: gemini-4-argon-vs-claude-sonnet-5-5 and claude-sonnet-5-5-vs-gpt-6-sol (both updated 2026-10-15).
+
+**Tools (tools.data.ts):** Updated ChatGPT, Claude and Gemini product entries: ChatGPT now shows GPT-6 Sol/Luna, Intelligent UI, Dots agents and Pro 500 tier; Claude shows Sonnet 5.5 as default and the full 5.5 family; Gemini shows Gemini 4 Argon as new flagship. All three verified dates updated to 2026-10-15.
+
+Key model facts recorded (verify against official sources before factual publication): Gemini 4 Argon — sparse MoE, 1M context, tunable reasoning (low/medium/high), $2/$10 intro API pricing through Nov 30 2026, available Oct 13. Claude Sonnet 5.5 — 30% faster/cheaper vs Sonnet 5, cache read $0.10/M, advanced cyber safeguards, Sep 28. Claude Opus 5.5 — $4/$20 API pricing, long-horizon agents, Sep 22. Claude Haiku 5.5 — 1M context, adaptive thinking, from $0.10/$0.50 (~75% cheaper than 4.5), Oct 7. GPT-6 Sol/Luna — replaced GPT-5.6 in ChatGPT; Intelligent UI renders interactive elements in chat; Dots agents persist multi-day background work; Pro 500 tier at $500/mo.
+
+No local production build was run. SiteCatalog.cs was not regenerated; do so if deploying with the .NET backend. Route count will increase due to new model profile comparison pages from GENERATED_COMPARISONS. Deploy to Netlify after verifying TypeScript compiles (npm run build:prod from client/aivorix-web).
+
 ## Trailing-slash SEO alignment: 2026-09-19
+
 
 Search Console reported `Failed: Redirect error` for `/comparisons`, `/compare`, and a comparison detail URL. Live checks with normal and Googlebot user agents found no loop or long chain: each slashless route received one Netlify Pretty URLs `301` to its trailing-slash form, then `200`. The final HTML nevertheless declared the slashless URL as canonical, and both sitemaps and internal links also advertised slashless routes. Updated `SeoService` to emit trailing-slash canonical/Open Graph URLs and normalize Aivorix URLs inside JSON-LD, updated internal router links, and updated the sitemap generator plus both generated sitemaps to use the final trailing-slash page URLs. Static assets and XML URLs remain unchanged. Content checks pass for 656 routes. Local Angular production build remains blocked by the Windows host's memory allocation failure; use CI/deploy build results as current build evidence.
 

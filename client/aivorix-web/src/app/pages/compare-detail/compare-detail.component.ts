@@ -46,7 +46,12 @@ import { SeoService } from "../../services/seo.service";
                 <small>{{ profile?.provider }} · {{ profile?.kind }}</small>
                 <h3>{{ profile?.name }}</h3>
                 <p>{{ profile?.description }}</p>
-                <a [href]="profile?.source" target="_blank" rel="nofollow noopener">Official specification ↗</a>
+                <a
+                  [href]="profile?.source"
+                  target="_blank"
+                  rel="nofollow noopener"
+                  >Official specification ↗</a
+                >
               </div>
             }
           </div>
@@ -85,10 +90,16 @@ import { SeoService } from "../../services/seo.service";
             Benchmark results are useful context, but they are not a universal
             winner score because test settings and tools vary.
           </p>
-          <div class="comparison-section-heading"><span>03</span><h2>Common questions</h2></div>
+          <div class="comparison-section-heading">
+            <span>03</span>
+            <h2>Common questions</h2>
+          </div>
           <section class="faq-list">
             @for (faq of faqs; track faq.question) {
-              <details><summary>{{ faq.question }}</summary><p>{{ faq.answer }}</p></details>
+              <details>
+                <summary>{{ faq.question }}</summary>
+                <p>{{ faq.answer }}</p>
+              </details>
             }
           </section>
           <section class="source-panel" aria-labelledby="official-sources">
@@ -130,22 +141,39 @@ export class CompareDetailComponent implements OnInit {
   get faqs() {
     if (!this.c || !this.left || !this.right) return [];
     return [
-      { question: `${this.left.name} or ${this.right.name}: which should I choose?`, answer: `Choose ${this.left.name} for ${this.c.bestLeft.toLowerCase()}. Choose ${this.right.name} for ${this.c.bestRight.toLowerCase()}. Validate the decision with your own prompts and total task cost.` },
-      { question: `Is ${this.left.name} cheaper than ${this.right.name}?`, answer: `Pricing units can differ. ${this.left.name}: ${this.left.pricing}. ${this.right.name}: ${this.right.pricing}. Check tool charges, plan limits, caching and long-context rules before comparing totals.` },
-      { question: `Which is better for coding and agent work?`, answer: `Capability depends on the selected product surface, tools and harness. ${this.left.name} is positioned for ${this.left.bestFor.toLowerCase()}; ${this.right.name} is positioned for ${this.right.bestFor.toLowerCase()}. Run the same repository task on both.` },
-      { question: `How do their context windows compare?`, answer: `${this.left.name} lists ${this.left.context}; ${this.right.name} lists ${this.right.context}. A larger limit does not by itself guarantee better retrieval or lower cost.` },
+      {
+        question: `${this.left.name} or ${this.right.name}: which should I choose?`,
+        answer: `Choose ${this.left.name} for ${this.c.bestLeft.toLowerCase()}. Choose ${this.right.name} for ${this.c.bestRight.toLowerCase()}. Validate the decision with your own prompts and total task cost.`,
+      },
+      {
+        question: `Is ${this.left.name} cheaper than ${this.right.name}?`,
+        answer: `Pricing units can differ. ${this.left.name}: ${this.left.pricing}. ${this.right.name}: ${this.right.pricing}. Check tool charges, plan limits, caching and long-context rules before comparing totals.`,
+      },
+      {
+        question: `Which is better for coding and agent work?`,
+        answer: `Capability depends on the selected product surface, tools and harness. ${this.left.name} is positioned for ${this.left.bestFor.toLowerCase()}; ${this.right.name} is positioned for ${this.right.bestFor.toLowerCase()}. Run the same repository task on both.`,
+      },
+      {
+        question: `How do their context windows compare?`,
+        answer: `${this.left.name} lists ${this.left.context}; ${this.right.name} lists ${this.right.context}. A larger limit does not by itself guarantee better retrieval or lower cost.`,
+      },
     ];
   }
   get comparisonRows(): readonly (readonly string[])[] {
     if (!this.c || !this.left || !this.right) return [];
     const important = [
       ["Company", this.left.provider, this.right.provider],
-      ["Product category", `${this.left.kind} · ${this.left.category}`, `${this.right.kind} · ${this.right.category}`],
+      [
+        "Product category",
+        `${this.left.kind} · ${this.left.category}`,
+        `${this.right.kind} · ${this.right.category}`,
+      ],
       ["Current pricing note", this.left.pricing, this.right.pricing],
       ["Best suited to", this.left.bestFor, this.right.bestFor],
       [
         "Key capabilities",
-        this.left.features.join("; "), this.right.features.join("; "),
+        this.left.features.join("; "),
+        this.right.features.join("; "),
       ],
       ["Last verified", this.left.verified, this.right.verified],
       ["Official product source", this.left.source, this.right.source],
@@ -175,14 +203,43 @@ export class CompareDetailComponent implements OnInit {
       title: this.c.title,
       description: `${this.c.intro} See current price, context window, features and best-use guidance.`,
       path: "/comparisons/" + this.c.slug,
-      jsonLd: { "@context": "https://schema.org", "@graph": [
-        { "@type": "Article", headline: this.c.title, dateModified: this.c.updated, author: { "@type": "Organization", name: "Aivorix Editorial" }, about: [this.left.name, this.right.name] },
-        { "@type": "BreadcrumbList", itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Comparisons", item: "https://aivorix.netlify.app/comparisons" },
-          { "@type": "ListItem", position: 2, name: this.c.title, item: `https://aivorix.netlify.app/comparisons/${this.c.slug}` },
-        ] },
-        { "@type": "FAQPage", mainEntity: this.faqs.map(faq => ({ "@type": "Question", name: faq.question, acceptedAnswer: { "@type": "Answer", text: faq.answer } })) },
-      ] },
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Article",
+            headline: this.c.title,
+            dateModified: this.c.updated,
+            author: { "@type": "Organization", name: "Aivorix Editorial" },
+            about: [this.left?.name || this.c.left, this.right?.name || this.c.right],
+          },
+          {
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Comparisons",
+                item: "https://aivorix.netlify.app/comparisons",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: this.c.title,
+                item: `https://aivorix.netlify.app/comparisons/${this.c.slug}`,
+              },
+            ],
+          },
+          {
+            "@type": "FAQPage",
+            mainEntity: this.faqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: { "@type": "Answer", text: faq.answer },
+            })),
+          },
+        ],
+      },
     });
   }
 }

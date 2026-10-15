@@ -196,17 +196,31 @@ export const AI_TOOL_DETAILS: Record<string, ToolDossier> = {
 },
   chatgpt: {
     launched: "November 30, 2022",
-    currentRelease: "GPT-5.6 family / GPT-6 Astra coverage",
+    currentRelease: "GPT-6 family (Sol / Luna) / GPT-6 Astra",
     releaseStatus: "Model availability depends on account and surface",
     positioning:
       "A general-purpose assistant for chat, research, coding, files, images, voice and end-to-end knowledge work.",
     modelNote:
-      "ChatGPT is the product. GPT-6 Astra now has a separate Aivorix model dossier alongside the GPT-5.6 family. A model listing does not establish access on every ChatGPT plan.",
+      "ChatGPT is the product. GPT-6 Sol powers paid plans and GPT-6 Luna powers Free/Go tiers. GPT-6 Astra has a separate Aivorix model dossier. A model listing does not establish access on every ChatGPT plan.",
     overview: [
       "ChatGPT began as a free research preview built on GPT-3.5 and has grown into a multi-tool workspace rather than a text-only chatbot.",
-      "The current GPT-5.6 family separates flagship quality (Sol), balanced everyday work (Terra) and fast low-cost work (Luna). ChatGPT can automatically combine reasoning with web, file, image, code and connected-app tools.",
+      "The GPT-6 family separates flagship professional quality (Sol) and fast low-cost conversational work (Luna). Intelligent UI allows responses to dynamically render interactive visual elements directly in chat.",
     ],
     timeline: [
+      {
+        date: "Oct 2026",
+        title: "GPT-6 family rollout & Intelligent UI",
+        status: "Current",
+        summary:
+          "OpenAI transitioned ChatGPT tiers to GPT-6 Sol and Luna, adding native interactive UI rendering and Dots persistent agents.",
+        changes: [
+          "GPT-6 Sol default for Plus, Pro, Business and Enterprise",
+          "GPT-6 Luna default for Free and Go",
+          "Intelligent UI: dynamic charts, calculators and forms in chat",
+          "Dots background agents on Astra; Pro 500 tier launched",
+        ],
+        sourceUrl: "https://openai.com/chatgpt/",
+      },
       {
         date: "Nov 2022",
         title: "ChatGPT research preview",
@@ -250,7 +264,7 @@ export const AI_TOOL_DETAILS: Record<string, ToolDossier> = {
       {
         date: "Jul-Aug 2026",
         title: "GPT-5.6 Sol, Terra and Luna",
-        status: "Current",
+        status: "Milestone",
         summary:
           "The family added durable capability tiers, configurable effort, stronger agent work and improved price-performance.",
         changes: [
@@ -405,17 +419,31 @@ export const AI_TOOL_DETAILS: Record<string, ToolDossier> = {
 
   claude: {
     launched: "March 14, 2023",
-    currentRelease: "Claude Sonnet 5",
-    releaseStatus: "Available across Claude plans since June 30, 2026",
+    currentRelease: "Claude Sonnet 5.5",
+    releaseStatus: "Available across Claude plans; released late September 2026",
     positioning:
       "A writing, coding and agentic-work assistant with a strong emphasis on long-form reasoning, controllability and safety.",
     modelNote:
-      "Claude is the product family. Sonnet 5 is the current default for Free and Pro; higher-capability Opus models and specialized Claude Code/Cowork surfaces have separate access and pricing.",
+      "Claude is the product family. Sonnet 5.5 is the current default for Free and Pro; Opus 5.5, Fable 5.1 and Haiku 5.5 complete the current 5.5 lineup.",
     overview: [
-      "Anthropic evolved Claude from a general conversational model into a family of fast Haiku, balanced Sonnet and frontier Opus models.",
-      "Sonnet 5 focuses on planning, browser/terminal tool use and autonomous work at Sonnet pricing, narrowing the gap with the larger Opus class.",
+      "Anthropic evolved Claude from a general conversational model into a family of fast Haiku, balanced Sonnet and frontier Opus/Fable models.",
+      "Sonnet 5.5 runs about 30% faster and cheaper per task than Sonnet 5, with built-in cyber safeguards and reduced cache read pricing for agent sessions.",
     ],
     timeline: [
+      {
+        date: "Sep-Oct 2026",
+        title: "Claude 5.5 generation (Sonnet 5.5, Opus 5.5, Haiku 5.5)",
+        status: "Current",
+        summary:
+          "Anthropic rolled out the 5.5 generation with improved speed, lower costs, adaptive thinking and advanced cyber safeguards.",
+        changes: [
+          "Claude Sonnet 5.5: 30% faster, lower cost per task, built-in cyber safeguards",
+          "Claude Haiku 5.5: 1M context, adaptive thinking, ~75% price cut",
+          "Claude Opus 5.5: long-running agent coding at reduced API cost",
+          "Dynamic workflows for multi-agent execution; Claude Dashboards beta",
+        ],
+        sourceUrl: "https://www.anthropic.com/claude",
+      },
       {
         date: "Mar 2023",
         title: "Claude public launch",
@@ -460,7 +488,7 @@ export const AI_TOOL_DETAILS: Record<string, ToolDossier> = {
       {
         date: "Jun 2026",
         title: "Claude Sonnet 5",
-        status: "Current",
+        status: "Milestone",
         summary:
           "The latest Sonnet focuses on autonomous plans, tool use, coding and professional work at scale.",
         changes: [
@@ -613,18 +641,32 @@ export const AI_TOOL_DETAILS: Record<string, ToolDossier> = {
 
   gemini: {
     launched: "February 8, 2024 (Gemini brand; Bard launched in 2023)",
-    currentRelease: "Gemini 3.5 Flash / 3.1 Pro",
+    currentRelease: "Gemini 4 Argon / 3.8 Flash",
     releaseStatus:
-      "3.5 Flash announced May 19, 2026; 3.1 Pro remains the complex-reasoning tier",
+      "Gemini 4 Argon launched October 13, 2026; 3.8 Flash serves high-speed workflows",
     positioning:
       "Google's multimodal assistant across the Gemini app, Search, Workspace, Android and developer platforms.",
     modelNote:
-      "Gemini is both a consumer product and a model family. The fastest current model and the deepest reasoning option may be different, and access varies across Gemini app, AI Studio, Vertex AI and Workspace.",
+      "Gemini is both a consumer product and a model family. Gemini 4 Argon is Google's new flagship sparse MoE reasoning model, while Gemini 3.8 Flash handles high-throughput and coding workloads.",
     overview: [
-      "Google renamed Bard to Gemini in February 2024 and paired the app with its Gemini model family, mobile access and an Advanced subscription.",
-      "The product now combines chat with Google Search grounding, connected apps, long context, live multimodal interaction, Deep Research and creation tools.",
+      "Google renamed Bard to Gemini in February 2024 and paired the app with its Gemini model family, mobile access and Google AI subscriptions.",
+      "The product combines chat with Google Search grounding, connected apps, long context, live multimodal interaction, Deep Research and Gemini 4 Argon frontier reasoning.",
     ],
     timeline: [
+      {
+        date: "Oct 2026",
+        title: "Gemini 4 Argon frontier release",
+        status: "Current",
+        summary:
+          "Google rolled out Gemini 4 Argon, a large sparse MoE transformer for deep multi-step reasoning, coding, science and robotics.",
+        changes: [
+          "Tunable thinking levels: low, medium, high",
+          "1M unified input-output context window",
+          "Introductory API pricing: $2 input / $10 output per 1M tokens",
+          "Rolled out to Google AI Pro/Ultra subscribers and Vertex AI",
+        ],
+        sourceUrl: "https://deepmind.google/models/gemini/gemini-4-argon/",
+      },
       {
         date: "Feb 2024",
         title: "Bard becomes Gemini",
@@ -673,7 +715,7 @@ export const AI_TOOL_DETAILS: Record<string, ToolDossier> = {
       {
         date: "Feb-May 2026",
         title: "Gemini 3.1 Pro and 3.5 Flash",
-        status: "Current",
+        status: "Milestone",
         summary:
           "3.1 Pro more than doubled 3 Pro's ARC-AGI-2 result; 3.5 Flash then targeted frontier quality at much higher speed.",
         changes: [

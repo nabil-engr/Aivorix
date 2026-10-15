@@ -7,6 +7,50 @@ const story = (article: NewsArticle): NewsArticle => article;
 
 export const NEWS = [
   story({
+    slug: "gemini-4-argon-launch-october-2026", title: "Google launches Gemini 4 Argon with tunable reasoning and a 1M-token context",
+    summary: "Google's newest flagship model is built for deep multi-step reasoning across text, vision and code, with introductory API pricing through November 2026.",
+    date: "2026-10-13", category: "Models", sourceName: "Google DeepMind", sourceUrl: "https://deepmind.google/models/gemini/gemini-4-argon/",
+    body: [
+      "Google has released Gemini 4 Argon, its most capable model to date, designed for complex software engineering, scientific research, financial analysis, legal workflows and cybersecurity defence. It is a large-scale sparse mixture-of-experts model built natively for multimodal reasoning across text, vision, audio and video.",
+      "The model features a 1-million-token unified context window and tunable reasoning depth—low, medium or high—so developers can trade inference time for cost. It is available in Google AI Studio, the Gemini API, Vertex AI and the Gemini app for Pro and Ultra subscribers. Google has set an introductory API price of $2 per million input tokens and $10 per million output tokens through November 30, 2026.",
+      "For teams already using Google tools, Argon arrives as a significant capability upgrade. Whether those gains translate to better task outcomes will depend on the workflow, the reasoning setting chosen and how well the model is prompted. Run your own evaluation before switching a production pipeline."
+    ],
+    takeaways: ["Gemini 4 Argon targets complex research, coding and professional reasoning tasks.", "Tunable thinking depth lets developers balance cost against response quality.", "Introductory API pricing of $2/$10 per million tokens runs through November 2026."]
+  }),
+  story({
+    slug: "claude-haiku-5-5-launch-october-2026", title: "Claude Haiku 5.5 arrives as Anthropic's fastest and most affordable model yet",
+    summary: "Haiku 5.5 brings the 5.5 generation's adaptive thinking to high-volume, latency-sensitive work at a price roughly 75 percent lower than its predecessor.",
+    date: "2026-10-07", category: "Models", sourceName: "Anthropic", sourceUrl: "https://www.anthropic.com/claude/haiku",
+    body: [
+      "Anthropic has released Claude Haiku 5.5, the fourth model in the 5.5 series and the first aimed squarely at high-volume, low-latency use cases such as classification, extraction, routing, data compaction and live customer support.",
+      "Haiku 5.5 carries a 1-million-token context window and up to 128,000 output tokens—the same context depth as Opus and Sonnet 5.5—but at a starting price around 75 percent lower than earlier Haiku versions. The model also supports adaptive thinking, meaning it can apply extended reasoning when a task demands it without requiring a separate API call.",
+      "For teams running subagent pipelines or high-throughput pipelines, Haiku 5.5 is worth testing as the worker tier below Sonnet and Opus. The decisive test is not the price alone but whether task success rate holds up compared to a more expensive model on the same evaluation set."
+    ],
+    takeaways: ["Haiku 5.5 offers 1M context and adaptive thinking at a significantly lower price point.", "It targets subagent, classification and high-volume extraction workflows.", "Pricing is roughly 75 percent lower than its predecessor."]
+  }),
+  story({
+    slug: "gpt-6-family-chatgpt-intelligent-ui-october-2026", title: "OpenAI replaces GPT-5.6 with GPT-6 across ChatGPT and introduces Intelligent UI",
+    summary: "GPT-6 Sol now powers paid ChatGPT plans while GPT-6 Luna becomes the free default, and a new Intelligent UI feature lets responses render interactive elements alongside text.",
+    date: "2026-10-01", category: "Products", sourceName: "OpenAI", sourceUrl: "https://openai.com/chatgpt/",
+    body: [
+      "OpenAI has moved ChatGPT to the GPT-6 model family. GPT-6 Sol powers Plus, Pro, Business and Enterprise plans and is tuned for professional, technical and coding work. GPT-6 Luna is the new default for Free and Go users, replacing GPT-5.6 Luna as the everyday conversational option.",
+      "The headline feature alongside GPT-6 is Intelligent UI, which lets ChatGPT dynamically generate interactive interface elements—charts, forms, calculators, checklists and small apps—directly inside the chat stream. OpenAI has also launched Dots, always-on background agents built on GPT-6 Astra that can continue working across multi-day tasks between chat sessions. A new Pro 500 tier at $500 per month grants access to GPT-6 Astra Ultrafast mode and is aimed at heavy enterprise and developer users.",
+      "The model update matters most to API users and power subscribers. Free-tier users benefit from Luna's everyday improvements, while the Dots feature and Pro 500 tier are relevant only for users who need persistent, long-horizon agent work. As always, plan tier and selected tools affect which model and features you actually receive."
+    ],
+    takeaways: ["GPT-6 Sol and GPT-6 Luna have replaced GPT-5.6 across ChatGPT subscription tiers.", "Intelligent UI lets responses render interactive elements natively in the chat.", "Dots brings persistent background agents; Pro 500 unlocks GPT-6 Astra Ultrafast mode."]
+  }),
+  story({
+    slug: "claude-sonnet-5-5-launch-september-2026", title: "Claude Sonnet 5.5 is faster, cheaper and carries better cyber safeguards",
+    summary: "Anthropic's updated mid-tier model cuts cost and latency while adding advanced security features designed for enterprise and developer workflows.",
+    date: "2026-09-28", category: "Models", sourceName: "Anthropic", sourceUrl: "https://www.anthropic.com/claude/sonnet",
+    body: [
+      "Anthropic has released Claude Sonnet 5.5, the successor to Claude Sonnet 5. The company says it runs about 30 percent faster and costs up to 30 percent less per task than Sonnet 5, while maintaining the same quality bar for coding and knowledge work.",
+      "Sonnet 5.5 also introduces advanced cyber safeguards—new built-in protections aimed at reducing the risk of prompt injection, unauthorised tool use and other security concerns that matter to enterprise deployments. Cache read pricing drops to $0.10 per million tokens, reducing the cost of long-running agent sessions that reuse prompts. The model retains a 1-million-token context window and up to 128,000 output tokens.",
+      "Sonnet 5.5 is still priced at $2 per million input tokens and $10 per million output tokens, keeping it in a competitive range for teams that need more than Haiku but cannot justify Opus or Fable for every call. Run a direct comparison on your own task set before migrating production traffic."
+    ],
+    takeaways: ["Sonnet 5.5 is 30 percent faster and up to 30 percent cheaper per task than Sonnet 5.", "Cache read price drops to $0.10 per million tokens, lowering agent session costs.", "Advanced cyber safeguards are now built into the model."]
+  }),
+  story({
     slug: "gpt-6-astra-model-guide-pricing-tools", title: "GPT-6 Astra is built for difficult work that takes more than one step",
     summary: "OpenAI's newest flagship model focuses on coding, research and agent workflows. Here is what changes, what it costs and who should consider it.",
     date: "2026-09-07", category: "Models", sourceName: "OpenAI Docs", sourceUrl: "https://developers.openai.com/api/docs/models/gpt-6-astra",

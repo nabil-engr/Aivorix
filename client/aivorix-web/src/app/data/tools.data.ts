@@ -36,16 +36,16 @@ export const AI_TOOLS = [
     name: "ChatGPT",
     company: "OpenAI",
     category: "General Assistant",
-    price: "Free; Go $8/mo; Plus $20/mo; Pro $200/mo (US reference)",
+    price: "Free; Go $8/mo; Plus $20/mo; Pro $200/mo; Pro 500 $500/mo (US reference)",
     bestFor:
-      "General productivity, coding, research, files, images and long-running work",
+      "General productivity, coding, research, files, images and long-running agent work",
     source: "https://openai.com/index/intelligent-ui-and-gpt-6-family/",
-    verified: "2026-08-24",
+    verified: "2026-11-02",
     features: [
-      "GPT-6 Sol, Luna and Astra model routing with Intelligent UI generative widgets",
+      "GPT-6 Sol on paid plans; GPT-6 Luna on Free/Go; Intelligent UI widgets",
       "Multi-agent collaborative Canvas editing for documents and code",
+      "Dots: always-on background agents powered by GPT-6 Astra",
       "Deep research, data analysis, voice and custom Dots agent notifications",
-      "Pro tier with unlimited access to frontier reasoning models",
     ],
   },
   {
@@ -53,14 +53,13 @@ export const AI_TOOLS = [
     name: "Claude",
     company: "Anthropic",
     category: "General Assistant",
-    price: "Free; Pro $20/mo in the US; higher tiers available",
+    price: "Free; Pro $20/mo in the US; Max and Team tiers available",
     bestFor: "Writing, coding, reasoning and long-form knowledge work",
-    source:
-      "https://www.anthropic.com/news/claude-5-5-family",
-    verified: "2026-08-24",
+    source: "https://www.anthropic.com/news/claude-5-5-family",
+    verified: "2026-10-28",
     features: [
-      "Claude 5.5 family: Sonnet 5.5 default, Haiku 5.5 and Opus 5.5",
-      "500K context window and sub-second token generation",
+      "Claude Sonnet 5.5 default — faster token generation, advanced cyber safeguards",
+      "Full 5.5 family: Haiku 5.5 (fast/cheap), Opus 5.5 (agentic), Fable 5.1 (frontier)",
       "Advanced desktop computer use and Claude Code repository agents",
       "Artifacts, Projects, knowledge bases and enterprise governance",
     ],
@@ -74,7 +73,7 @@ export const AI_TOOLS = [
     bestFor:
       "Google ecosystem users, multimodal work, Search and Workspace integration",
     source: "https://blog.google/technology/ai/gemini-4-argon-architecture/",
-    verified: "2026-08-24",
+    verified: "2026-10-15",
     features: [
       "Gemini 4 Argon and Gemini 3.8 Flash multimodal reasoning tiers",
       "2M native multimodal context window and sandbox code execution",

@@ -569,7 +569,7 @@ const EDITORIAL_COMPARISONS = [
       ["Best fit", "Researchers and analysts", "Writers and developers"],
     ],
     sources: [
-      "https://www.perplexity.ai/help-center/en/articles/10354919-what-advanced-ai-models-are-included-in-my-subscription",
+      "https://www.perplexity.ai/help-center/en/articles/10354919-what-included-in-my-subscription",
       "https://www.perplexity.ai/help-center/en/articles/11680686-perplexity-max",
       "https://www.anthropic.com/research/claude-sonnet-5",
     ],

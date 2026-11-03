@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, RouterLink } from "@angular/router";
+import { Subscription } from "rxjs";
 import { SeoService } from "../../services/seo.service";
 import { RANKING_RUBRICS, CAPABILITY_LABELS } from "../../data/task-fit.data";
 
@@ -238,7 +239,7 @@ const PAGES: Record<string, readonly [string, string, string]> = {
     `,
   ],
 })
-export class StaticPageComponent implements OnInit {
+export class StaticPageComponent implements OnInit, OnDestroy {
   readonly rankingRubrics = RANKING_RUBRICS;
   readonly capabilityLabels = CAPABILITY_LABELS;
   key = "";
@@ -250,6 +251,7 @@ export class StaticPageComponent implements OnInit {
   website = "";
   formStatus = "";
   submitting = false;
+  private sub?: Subscription;
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -258,20 +260,26 @@ export class StaticPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.key = this.route.snapshot.data["page"] || "404";
-    this.page = PAGES[this.key] || PAGES["404"];
+    this.sub = this.route.data.subscribe((data) => {
+      this.key = data["page"] || "404";
+      this.page = PAGES[this.key] || PAGES["404"];
 
-    if (this.key === "404") {
-      this.seo.noIndex();
-      return;
-    }
-
-    this.seo.set({
-      title: this.page[0],
-      description: this.page[1],
-      path:
-        "/" + this.route.snapshot.url.map((segment) => segment.path).join("/"),
+      if (this.key === "404") {
+        this.seo.noIndex();
+      } else {
+        const urlSegments = this.route.snapshot.url.map((s) => s.path).join("/");
+        this.seo.set({
+          title: this.page[0],
+          description: this.page[1],
+          path: "/" + urlSegments,
+        });
+      }
+      this.cdr.markForCheck();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 
   async submitContact(): Promise<void> {

@@ -2,13 +2,16 @@ import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, RESPONSE_INIT, ResponseInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 
-interface SeoOptions {
+export interface SeoOptions {
   title: string;
   description: string;
   path: string;
   type?: string;
   image?: string;
   jsonLd?: unknown;
+  keywords?: string;
+  publishedTime?: string;
+  section?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -41,6 +44,17 @@ export class SeoService {
     this.meta.updateTag({ name: 'twitter:title', content: fullTitle });
     this.meta.updateTag({ name: 'twitter:description', content: options.description });
     this.meta.updateTag({ name: 'twitter:image', content: image });
+
+    if (options.keywords) {
+      this.meta.updateTag({ name: 'keywords', content: options.keywords });
+    }
+    if (options.publishedTime) {
+      this.meta.updateTag({ property: 'article:published_time', content: options.publishedTime });
+      this.meta.updateTag({ property: 'article:modified_time', content: options.publishedTime });
+    }
+    if (options.section) {
+      this.meta.updateTag({ property: 'article:section', content: options.section });
+    }
 
     let canonical = this.document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonical) {

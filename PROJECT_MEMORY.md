@@ -24,6 +24,21 @@ Key model facts recorded (verify against official sources before factual publica
 
 No local production build was run. SiteCatalog.cs was not regenerated; do so if deploying with the .NET backend. Route count will increase due to new model profile comparison pages from GENERATED_COMPARISONS. Deploy to Netlify after verifying TypeScript compiles (npm run build:prod from client/aivorix-web).
 
+## AI News Expansion & Search Relevance Algorithm (Rank 1 Optimization): 2026-11-03
+
+1. **New High-Impact News Stories (Total now: 27 articles):**
+   - `google-gemini-live-multimodal-voice-vision` (2026-11-03): Gemini Live real-time camera streaming, screen vision, sub-300ms bidirectional speech latency, and developer WebSocket endpoints.
+   - `anthropic-claude-code-multi-repo-team-workspaces` (2026-11-02): Multi-repository indexing, automated PR security reviews, and shared team workspace tools.
+   - `meta-llama-4-open-weights-local-reasoning-preview` (2026-10-22): Llama 4 open-weights reasoning architecture, native multimodal tool support, and local inference quantization.
+   - All articles adhere strictly to 70-220 char summaries, 3 body sections, 3 takeaways, and HTTPS official citations.
+2. **On-Site Search Relevance & Rank 1 Matching Engine:**
+   - Upgraded [`news-list.component.ts`](client/aivorix-web/src/app/pages/news-list/news-list.component.ts) with multi-term tokenization and an AI synonym dictionary (mapping OpenAI/ChatGPT, Claude/Anthropic, Gemini/Google, Grok/xAI, Coding/Repo/Developer, Pricing/Tokens/Free).
+   - Weighted scoring algorithm: Exact phrase matches (350+ pts), title keywords (80 pts), searchIntents (70 pts), summary (40 pts), and synonym hits (30 pts). The most relevant article is guaranteed to appear at **Rank 1** with a visual `★ Rank 1 Top Match` badge.
+   - Quick topic filter pills: `All`, `ChatGPT & OpenAI`, `Claude & Anthropic`, `Gemini & Google`, `Coding & Agents`, `Open Source & Meta`, `Enterprise`.
+3. **Google News & Search Engine SEO Schema:**
+   - Enhanced [`SeoService`](client/aivorix-web/src/app/services/seo.service.ts) and [`news-detail.component.ts`](client/aivorix-web/src/app/pages/news-detail/news-detail.component.ts) with Google News compliant `NewsArticle` JSON-LD schema (including `datePublished`, `dateModified`, `author`, `publisher` with logo, `articleSection`, `keywords`, and trailing-slash canonical URLs).
+   - Added Open Graph `article:published_time`, `article:modified_time`, `article:section`, and `keywords` meta tags for maximum Google News ranking signals.
+
 ## Pagination & Performance Multi-Tier Caching Optimization: 2026-11-03
 
 1. **Pagination Component & Implementation:**

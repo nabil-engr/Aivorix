@@ -308,20 +308,45 @@ export class NewsDetailComponent implements OnInit, OnDestroy {
           .slice(0, 3 - this.related.length),
       );
     }
+
+    const keywords = (this.article.searchIntents ?? [])
+      .concat([this.article.category, "AI news", "frontier models"])
+      .join(", ");
+
     this.seo.set({
       title: this.article.title,
       description: this.article.summary,
       path: "/news/" + this.article.slug,
       type: "article",
+      keywords,
+      publishedTime: this.article.date,
+      section: this.article.category,
       jsonLd: {
         "@context": "https://schema.org",
         "@type": "NewsArticle",
         headline: this.article.title,
-        datePublished: this.article.date,
-        dateModified: this.article.date,
-        author: { "@type": "Organization", name: "Aivorix Editorial" },
-        publisher: { "@type": "Organization", name: "Aivorix" },
-        mainEntityOfPage: "https://aivorix.netlify.app/news/" + this.article.slug,
+        description: this.article.summary,
+        datePublished: this.article.date + "T08:00:00+00:00",
+        dateModified: this.article.date + "T12:00:00+00:00",
+        author: {
+          "@type": "Organization",
+          name: "Aivorix AI Editorial",
+          url: "https://aivorix.netlify.app/about/",
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Aivorix",
+          url: "https://aivorix.netlify.app/",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://aivorix.netlify.app/og-default.png",
+          },
+        },
+        image: ["https://aivorix.netlify.app/og-default.png"],
+        articleSection: this.article.category,
+        keywords,
+        mainEntityOfPage:
+          "https://aivorix.netlify.app/news/" + this.article.slug + "/",
       },
     });
   }

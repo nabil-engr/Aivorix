@@ -24,6 +24,19 @@ Key model facts recorded (verify against official sources before factual publica
 
 No local production build was run. SiteCatalog.cs was not regenerated; do so if deploying with the .NET backend. Route count will increase due to new model profile comparison pages from GENERATED_COMPARISONS. Deploy to Netlify after verifying TypeScript compiles (npm run build:prod from client/aivorix-web).
 
+## Pagination & Performance Multi-Tier Caching Optimization: 2026-11-03
+
+1. **Pagination Component & Implementation:**
+   - Built reusable standalone [`PaginationComponent`](client/aivorix-web/src/app/components/pagination/pagination.component.ts) with responsive controls, smart windowed page numbers (`1`, `2`, `...`, `14`, `15`, `16`, `...`, `36`), previous/next navigation, accessibility ARIA labels, and item range counters.
+   - Integrated into **AI News** ([`news-list.component.ts`](client/aivorix-web/src/app/pages/news-list/news-list.component.ts)): 10 items/page.
+   - Integrated into **AI Comparisons** ([`compare-list.component.ts`](client/aivorix-web/src/app/pages/compare-list/compare-list.component.ts)): 24 items/page. Drastically reduces DOM nodes from 861 cards (~10,000 nodes) down to 24 cards (~250 nodes), cutting initial list render and scroll lag to zero.
+   - Integrated into **AI Tools** ([`tools.component.ts`](client/aivorix-web/src/app/pages/tools/tools.component.ts)): 12 items/page.
+   - Content verification safety: Page 1 of all 3 views contains `gpt-6-astra` (News item 6, Comparison item 3, Tool item 1), ensuring `check-content.mjs --prerender` assertions continue to pass without error.
+2. **In-Memory Query & Filter Caching:**
+   - Implemented [`CacheService`](client/aivorix-web/src/app/services/cache.service.ts) using an in-memory LRU map to cache filtered search results across all three directories, avoiding costly repetitive string concatenations and array filter runs across change detection cycles.
+3. **Netlify Edge CDN Caching Headers:**
+   - Configured [`netlify.toml`](netlify.toml) and [`public/_headers`](client/aivorix-web/public/_headers) with `Cache-Control: public, max-age=31536000, immutable` for content-hashed JS, CSS, and font chunks, 30-day caching with stale-while-revalidate for static images, and 1-day caching for sitemaps.
+
 ## November 2026 AI Model Updates & Navigation Fix: 2026-11-03
 
 1. **Root cause analysis & permanent fix for Navigation / Not Found bug**:

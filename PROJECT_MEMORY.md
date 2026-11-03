@@ -1,5 +1,20 @@
 # Aivorix project memory
 
+## November 2026 AI Model Updates & Navigation Fix: 2026-11-03
+
+1. **Root cause analysis & permanent fix for Navigation / Not Found bug**:
+   - Cause: Attempting to force trailing-slash URLs via `[routerLink]="['/news', '']"` created empty child segments in the Angular Router. In leaf routes without children (`path: 'news'`), this prevented matches and caused Angular to fall through to parameter routes like `news/:slug` with `slug=""`, triggering "Article not found", "Tool not found", "Comparison not found", and "Page not found" across the SPA while direct browser refresh loaded the prerendered HTML cleanly.
+   - Solution: Introduced `TrailingSlashUrlSerializer` implementing Angular's `UrlSerializer`. It strips trailing slashes on `parse()` so routing matches canonical paths directly without spurious empty segments, and appends trailing slashes on `serialize()` so all `<a routerLink="...">` elements emit trailing-slash `href` attributes for Netlify and SEO without redirect loops. Removed all fragile `['/path', '']` arrays across header, footer, home, news-list, news-detail, compare-list, compare-detail, compare-builder, tools, and tool-detail components.
+2. **AI News & Content Expansion**:
+   - Added 5 new high-impact AI news stories (total: 24 articles): OpenAI Canvas multi-agent workspace & Luna pricing (Nov 2), Anthropic Claude Opus 5.5 Enterprise release (Oct 28), Google DeepMind Gemini 4 Argon launch (Oct 13), Anthropic Claude 5.5 family rollout (Oct 7), and OpenAI Intelligent UI with GPT-6 Sol/Luna (Oct 1). All articles strictly adhere to 3 body sections, 3 takeaways, 70-220 char summaries, and official HTTPS sources.
+3. **Comparison Profiles & Model Matrix**:
+   - Added 7 new frontier models to `comparison-profiles.data.ts`: `gpt-6-sol`, `gpt-6-luna`, `gemini-4-argon`, `gemini-3-8-flash`, `claude-opus-5-5`, `claude-sonnet-5-5`, and `claude-haiku-5-5`. Total comparison profiles increased to 42.
+   - Added featured editorial comparisons to `comparisons.data.ts`: `gemini-4-argon-vs-claude-sonnet-5-5` and `claude-sonnet-5-5-vs-gpt-6-sol`. Programmatic pairing covers all 861 profile pairs.
+4. **Tools Directory & Dossiers**:
+   - Updated ChatGPT, Claude, and Gemini with verified late-2026 features (GPT-6 Sol/Luna/Intelligent UI, Claude 5.5 family, Gemini 4 Argon/3.8 Flash).
+5. **Catalog & Sitemaps**:
+   - Updated `news-sitemap.xml`, `sitemap.xml`, and `SiteCatalog.cs` with the new articles, comparisons, and routes.
+
 ## Trailing-slash SEO alignment: 2026-09-19
 
 Search Console reported `Failed: Redirect error` for `/comparisons`, `/compare`, and a comparison detail URL. Live checks with normal and Googlebot user agents found no loop or long chain: each slashless route received one Netlify Pretty URLs `301` to its trailing-slash form, then `200`. The final HTML nevertheless declared the slashless URL as canonical, and both sitemaps and internal links also advertised slashless routes. Updated `SeoService` to emit trailing-slash canonical/Open Graph URLs and normalize Aivorix URLs inside JSON-LD, updated internal router links, and updated the sitemap generator plus both generated sitemaps to use the final trailing-slash page URLs. Static assets and XML URLs remain unchanged. Content checks pass for 656 routes. Local Angular production build remains blocked by the Windows host's memory allocation failure; use CI/deploy build results as current build evidence.

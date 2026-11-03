@@ -42,3 +42,4 @@ TestResults/
 
 # Local Netlify folder
 .netlify
+powershell.cmd

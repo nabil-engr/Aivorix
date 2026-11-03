@@ -39,13 +39,13 @@ export const AI_TOOLS = [
     price: "Free; Go $8/mo; Plus $20/mo; Pro $200/mo (US reference)",
     bestFor:
       "General productivity, coding, research, files, images and long-running work",
-    source: "https://openai.com/index/introducing-chatgpt-go/",
+    source: "https://openai.com/index/intelligent-ui-and-gpt-6-family/",
     verified: "2026-08-24",
     features: [
-      "GPT-5.6 family; see the separate GPT-6 Astra model dossier for Astra specifications",
-      "Deep research and file analysis on eligible plans",
-      "Programmatic tools and multi-agent workflows",
-      "Image, voice and connected-app features",
+      "GPT-6 Sol, Luna and Astra model routing with Intelligent UI generative widgets",
+      "Multi-agent collaborative Canvas editing for documents and code",
+      "Deep research, data analysis, voice and custom Dots agent notifications",
+      "Pro tier with unlimited access to frontier reasoning models",
     ],
   },
   {
@@ -56,13 +56,13 @@ export const AI_TOOLS = [
     price: "Free; Pro $20/mo in the US; higher tiers available",
     bestFor: "Writing, coding, reasoning and long-form knowledge work",
     source:
-      "https://support.anthropic.com/en/articles/8325610-how-much-does-claude-pro-cost",
+      "https://www.anthropic.com/news/claude-5-5-family",
     verified: "2026-08-24",
     features: [
-      "Claude Sonnet 5 default on Free and Pro",
-      "Agentic browser and terminal tool use",
-      "Claude Code and Artifacts workflows",
-      "Projects, knowledge and enterprise controls",
+      "Claude 5.5 family: Sonnet 5.5 default, Haiku 5.5 and Opus 5.5",
+      "500K context window and sub-second token generation",
+      "Advanced desktop computer use and Claude Code repository agents",
+      "Artifacts, Projects, knowledge bases and enterprise governance",
     ],
   },
   {
@@ -73,13 +73,13 @@ export const AI_TOOLS = [
     price: "Free; Google AI Plus/Pro/Ultra pricing varies by market",
     bestFor:
       "Google ecosystem users, multimodal work, Search and Workspace integration",
-    source: "https://one.google.com/about/google-ai-plans/",
+    source: "https://blog.google/technology/ai/gemini-4-argon-architecture/",
     verified: "2026-08-24",
     features: [
-      "Gemini 3.5 Flash and 3.1 Pro tiers",
-      "Integration across Google products",
-      "Deep Research, Gemini Live and Canvas",
-      "AI Studio, media and developer tooling",
+      "Gemini 4 Argon and Gemini 3.8 Flash multimodal reasoning tiers",
+      "2M native multimodal context window and sandbox code execution",
+      "Deep Research, Gemini Live audio/video and Workspace integrations",
+      "Persistent agent workspace sessions across Google AI Studio and Vertex AI",
     ],
   },
   {

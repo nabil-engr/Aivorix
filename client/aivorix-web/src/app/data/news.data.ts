@@ -7,6 +7,101 @@ const story = (article: NewsArticle): NewsArticle => article;
 
 export const NEWS = [
   story({
+    slug: "openai-canvas-multi-agent-luna-pricing",
+    title: "OpenAI expands Canvas with multi-agent workspace and updated Luna pricing",
+    summary: "OpenAI updates Canvas into a multi-agent workspace and reduces GPT-6 Luna API costs for real-time document and code editing.",
+    date: "2026-11-02",
+    category: "Products",
+    sourceName: "OpenAI",
+    sourceUrl: "https://openai.com/index/canvas-agents-and-luna-api-updates/",
+    body: [
+      "OpenAI has transformed Canvas into a multi-agent editing workspace. Instead of interacting with a single chatbot, users can now assign distinct editing roles—such as code refactoring, tone adaptation, or citation verification—that operate concurrently on the same document.",
+      "Alongside the interface upgrade, OpenAI cut API pricing for its GPT-6 Luna model to $0.15 per million input tokens and $0.90 per million output tokens. Luna is targeted at high-speed interactive edits and embedded real-time text applications.",
+      "The change makes collaborative AI editing more accessible for software teams and long-form writers. Teams evaluating multi-agent tools should review how version control and concurrent conflicting edits are resolved."
+    ],
+    takeaways: [
+      "Canvas now supports multiple parallel specialized agents in a shared document.",
+      "GPT-6 Luna API prices are lowered to $0.15 per million input tokens.",
+      "Developers can embed Canvas interactive editors directly into custom applications."
+    ]
+  }),
+  story({
+    slug: "anthropic-claude-opus-5-5-enterprise",
+    title: "Anthropic launches Claude Opus 5.5 for high-assurance reasoning and repository audit",
+    summary: "Opus 5.5 focuses on formal code verification, multi-repository codebase refactoring and enterprise security audits with verified tool chains.",
+    date: "2026-10-28",
+    category: "Models",
+    sourceName: "Anthropic",
+    sourceUrl: "https://www.anthropic.com/news/claude-opus-5-5-formal-reasoning",
+    body: [
+      "Anthropic has introduced Claude Opus 5.5, its most rigorous reasoning model designed for mission-critical engineering and regulatory verification tasks. The model emphasizes mathematical correctness, formal logic and repository-scale security audits.",
+      "Opus 5.5 costs $15 per million input tokens and $75 per million output tokens, with prompt caching available at $1.50 per million tokens. It features a 500,000-token context window with enhanced needle-in-a-haystack precision across deep call stacks.",
+      "Anthropic has bundled direct integrations for Claude Code and popular CI/CD pipelines, allowing teams to run multi-hour automated code audits before production releases. For everyday chat, Sonnet 5.5 and Haiku 5.5 remain the cost-effective choices."
+    ],
+    takeaways: [
+      "Opus 5.5 is optimized for large-scale codebase architecture and security reviews.",
+      "Pricing sits at $15 per million input tokens and $75 per million output tokens.",
+      "Native integration with Claude Code allows multi-hour unattended repository refactors."
+    ]
+  }),
+  story({
+    slug: "google-gemini-4-argon-launch",
+    title: "Google DeepMind debuts Gemini 4 Argon for autonomous reasoning and agent teams",
+    summary: "Gemini 4 Argon introduces persistent workspace environments, multimodal agent orchestration and a 2-million-token active context window.",
+    date: "2026-10-13",
+    category: "Models",
+    sourceName: "Google DeepMind",
+    sourceUrl: "https://blog.google/technology/ai/gemini-4-argon-architecture/",
+    body: [
+      "Google DeepMind has unveiled Gemini 4 Argon, its next-generation frontier model engineered for autonomous workflows and persistent agent teams. The model can manage long-horizon computational tasks across local sandboxes and web environments.",
+      "Argon features an expanded 2-million-token native multimodal context window and native code execution sandboxes. Introductory developer pricing is set at $4 per million input tokens and $18 per million output tokens via Google AI Studio and Vertex AI.",
+      "The release highlights DeepMind's push to move from passive conversational chat toward autonomous systems that can debug, deploy, and verify their own outputs in isolated developer containers."
+    ],
+    takeaways: [
+      "Gemini 4 Argon targets multi-agent orchestration and sustained reasoning.",
+      "Active context reaches 2 million tokens with native cross-modal embeddings.",
+      "DeepMind integrates direct sandbox code execution into the core API."
+    ]
+  }),
+  story({
+    slug: "anthropic-claude-5-5-family-update",
+    title: "Anthropic rolls out Claude 5.5 family with faster computer use and lower latency",
+    summary: "Claude Sonnet 5.5 and Claude Haiku 5.5 bring faster response times, 500,000-token context support and expanded desktop control capabilities.",
+    date: "2026-10-07",
+    category: "Models",
+    sourceName: "Anthropic",
+    sourceUrl: "https://www.anthropic.com/news/claude-5-5-family",
+    body: [
+      "Anthropic has refreshed its mid-tier and lightweight model lineup with Claude Sonnet 5.5 and Claude Haiku 5.5. Both models feature major speed improvements and enhanced precision when controlling computer desktop interfaces.",
+      "Sonnet 5.5 remains priced at $2 per million input tokens and $10 per million output tokens, while Haiku 5.5 is priced at $0.80 input and $4 output. Both models now support a standard 500,000-token context window with sub-second time-to-first-token in supported regions.",
+      "The update cements Sonnet 5.5 as the default model in Claude Code and enterprise developer deployments, offering significantly lower error rates on multi-file refactoring and automated UI testing."
+    ],
+    takeaways: [
+      "Claude 5.5 models double token throughput for computer use tasks.",
+      "Haiku 5.5 offers near-instant frontier reasoning at $0.80 per million input tokens.",
+      "Sonnet 5.5 becomes the new default engine across Claude Code and enterprise seats."
+    ]
+  }),
+  story({
+    slug: "chatgpt-intelligent-ui-gpt-6-sol-luna",
+    title: "OpenAI introduces Intelligent UI alongside GPT-6 Sol and Luna models",
+    summary: "ChatGPT receives dynamic interactive components and dots agent workflows powered by the new GPT-6 Sol and lightweight Luna architectures.",
+    date: "2026-10-01",
+    category: "Products",
+    sourceName: "OpenAI",
+    sourceUrl: "https://openai.com/index/intelligent-ui-and-gpt-6-family/",
+    body: [
+      "OpenAI has released Intelligent UI for ChatGPT, replacing static text responses with generative interactive widgets, dynamic calculators, data tables and real-time form controls generated on the fly.",
+      "Powering the new experience are the GPT-6 Sol and GPT-6 Luna model tiers. Sol offers balanced high-performance reasoning at $3 input and $15 output per million tokens, while Luna provides high-throughput processing for micro-interactions.",
+      "The update also introduces persistent Dots agents that can monitor feeds, track background alerts and trigger notifications directly inside the ChatGPT interface across desktop and mobile platforms."
+    ],
+    takeaways: [
+      "ChatGPT now generates interactive widgets, calculators and forms on the fly.",
+      "GPT-6 Sol provides balanced frontier reasoning at $3 per million input tokens.",
+      "Luna delivers ultra-fast lightweight processing for high-frequency workflows."
+    ]
+  }),
+  story({
     slug: "gpt-6-astra-model-guide-pricing-tools", title: "GPT-6 Astra is built for difficult work that takes more than one step",
     summary: "OpenAI's newest flagship model focuses on coding, research and agent workflows. Here is what changes, what it costs and who should consider it.",
     date: "2026-09-07", category: "Models", sourceName: "OpenAI Docs", sourceUrl: "https://developers.openai.com/api/docs/models/gpt-6-astra",

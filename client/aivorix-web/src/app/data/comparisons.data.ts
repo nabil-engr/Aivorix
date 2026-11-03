@@ -2,6 +2,57 @@ import { COMPARISON_PROFILES } from "./comparison-profiles.data";
 
 const EDITORIAL_COMPARISONS = [
 {
+  "slug": "gemini-4-argon-vs-claude-sonnet-5-5",
+  "title": "Gemini 4 Argon vs Claude Sonnet 5.5: frontier reasoning, tools and context tradeoffs",
+  "left": "gemini-4-argon",
+  "right": "claude-sonnet-5-5",
+  "updated": "2026-10-15",
+  "intro": "Compare Google's multimodal orchestration flagship with Anthropic's leading computer-use and coding model. Both represent the late 2026 frontier for autonomous developer workflows.",
+  "verdict": "Choose Gemini 4 Argon for multi-agent persistent workspaces, massive 2M multimodal inputs, and built-in sandbox code execution. Choose Claude Sonnet 5.5 for rapid repository-scale refactoring in Claude Code and proven desktop computer control.",
+  "bestLeft": "Multi-modal reasoning, native sandbox execution and 2M context",
+  "bestRight": "Sub-second coding velocity and desktop computer use in Claude Code",
+  "rows": [
+    ["Primary focus", "Multimodal agent orchestration", "Agentic coding and computer use"],
+    ["Standard input / 1M tokens", "$4", "$2"],
+    ["Standard output / 1M tokens", "$18", "$10"],
+    ["Cached input / 1M tokens", "$0.40", "$0.20"],
+    ["Active context window", "2,000,000 tokens", "500,000 tokens"],
+    ["Maximum output", "128,000 tokens", "128,000 tokens"],
+    ["Input modalities", "Text, image, audio, video", "Text and image"],
+    ["Specialized capabilities", "Native container execution & web grounding", "Desktop UI control & Claude Code CLI"],
+    ["Best fit", "Data-heavy multimodal workflows", "Software engineering teams"]
+  ],
+  "sources": [
+    "https://ai.google.dev/gemini-api/docs/models/gemini-4-argon",
+    "https://platform.claude.com/docs/en/models/sonnet-5-5/overview"
+  ]
+},
+{
+  "slug": "claude-sonnet-5-5-vs-gpt-6-sol",
+  "title": "Claude Sonnet 5.5 vs GPT-6 Sol: coding agents, price and latency comparison",
+  "left": "claude-sonnet-5-5",
+  "right": "gpt-6-sol",
+  "updated": "2026-10-15",
+  "intro": "Compare Anthropic's workhorse frontier model with OpenAI's balanced GPT-6 Sol. Both models target high-velocity software engineering and autonomous tool execution.",
+  "verdict": "Choose Claude Sonnet 5.5 when sub-second token generation and Claude Code integration are your priority. Choose GPT-6 Sol when mid-turn steering in the Responses API and OpenAI ecosystem tooling fit your existing pipeline.",
+  "bestLeft": "Lower per-token cost, sub-second latency and desktop control",
+  "bestRight": "1M+ context window and flexible reasoning effort levels",
+  "rows": [
+    ["Primary focus", "Fast coding and computer control", "Balanced reasoning and agent tools"],
+    ["Standard input / 1M tokens", "$2", "$3"],
+    ["Standard output / 1M tokens", "$10", "$15"],
+    ["Cached input / 1M tokens", "$0.20", "$0.30"],
+    ["Context limit", "500,000 tokens", "1,050,000 tokens"],
+    ["Reasoning control", "Adaptive thinking budget", "none, low, medium, high, max"],
+    ["Tool harness", "Computer use, Claude Code, bash", "Responses API, web search, code interpreter"],
+    ["Turn steering", "Standard turn-based messages", "Mid-turn steering during execution"]
+  ],
+  "sources": [
+    "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+    "https://developers.openai.com/api/docs/models/gpt-6-sol"
+  ]
+},
+{
   "slug": "gpt-6-astra-vs-gpt-5-6-sol",
   "title": "GPT-6 Astra vs GPT-5.6 Sol: capability, pricing and upgrade tradeoffs",
   "left": "gpt-6-astra",
